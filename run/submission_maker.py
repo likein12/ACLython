@@ -22,7 +22,6 @@ for line in open("./draft.py", "r"):
         for class_name in re.split(r' *, *', import_string):
             if class_name.split(".")[0] == "atcoder":
                 class_set.add(class_name.split(".")[1])
-        class_set.add(line.rstrip().split()[1].split(".")[1])
     code.append(line.rstrip())
 
 code = "\n".join(code)

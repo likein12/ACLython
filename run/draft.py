@@ -1,11 +1,14 @@
-import sys
-from atcoder import SccGraph, MfGraph
-
-read = sys.stdin.buffer.read
-readline = sys.stdin.buffer.readline
-readlines = sys.stdin.buffer.readlines
+from atcoder import FenwickTree
  
-N, M = list(map(int, readline().split()))
-AB = [list(map(int, readline().split())) for i in range(M)]
-
-SccGraph(3)
+N,Q = list(map(int,input().split()))
+A = list(map(int,input().split()))
+fw = FenwickTree(N)
+for i, a in enumerate(A):
+    fw.add(i,a)
+ 
+for i in range(Q):
+    a,b,c = list(map(int,input().split()))
+    if a==0:
+        fw.add(b,c)
+    else:
+        print(fw.sum(b,c))
