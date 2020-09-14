@@ -1,13 +1,12 @@
 
-code = """
 
 # distutils: language=c++
 # distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp cimport bool
 from libcpp.vector cimport vector
+from libcpp cimport bool
 cdef extern from "<atcoder/maxflow>" namespace "atcoder":
     cdef cppclass mf_graph[Cap]:
         mf_graph(int n)
@@ -72,23 +71,3 @@ cdef class SccGraph:
         self._thisptr.add_edge(fr, to)
     cpdef vector[vector[int]] scc(self):
         return self._thisptr.scc()
-"""
-
-
-import os,sys
-if sys.argv[-1] == 'ONLINE_JUDGE':
-    open('atcoder.pyx','w').write(code)
-    os.system('cythonize -i -3 -b atcoder.pyx')
-
-
-
-from atcoder import SccGraph, MfGraph
-
-read = sys.stdin.buffer.read
-readline = sys.stdin.buffer.readline
-readlines = sys.stdin.buffer.readlines
-
-N, M = list(map(int, readline().split()))
-AB = [list(map(int, readline().split())) for i in range(M)]
-
-SccGraph(3)

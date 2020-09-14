@@ -1,13 +1,9 @@
-
-code = """
-
 # distutils: language=c++
 # distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
-
-from libcpp cimport bool
 from libcpp.vector cimport vector
+from libcpp cimport bool
 cdef extern from "<atcoder/maxflow>" namespace "atcoder":
     cdef cppclass mf_graph[Cap]:
         mf_graph(int n)
@@ -40,7 +36,7 @@ cdef class MfGraph:
 
     cpdef vector[int] get_edge(self, int i):
         cdef mf_graph[int].edge *e = new mf_graph[int].edge(self._thisptr.get_edge(i))
-        cdef vector[int] *ret_e = new vector[int]()
+        cdef vector[int] *ret_e = new vector[int]()        
         ret_e.push_back(e.frm)
         ret_e.push_back(e.to)
         ret_e.push_back(e.cap)
@@ -58,37 +54,3 @@ cdef class MfGraph:
         return ret_es[0]
     cpdef void change_edge(self, int i, int new_cap, int new_flow):
         self._thisptr.change_edge(i, new_cap, new_flow)
-cdef extern from "<atcoder/scc>" namespace "atcoder":
-    cdef cppclass scc_graph:
-        scc_graph(int n)
-        void add_edge(int fr, int to)
-        vector[vector[int]] scc()
-
-cdef class SccGraph:
-    cdef scc_graph *_thisptr
-    def __cinit__(self, int n):
-        self._thisptr = new scc_graph(n)
-    cpdef void add_edge(self, int fr, int to):
-        self._thisptr.add_edge(fr, to)
-    cpdef vector[vector[int]] scc(self):
-        return self._thisptr.scc()
-"""
-
-
-import os,sys
-if sys.argv[-1] == 'ONLINE_JUDGE':
-    open('atcoder.pyx','w').write(code)
-    os.system('cythonize -i -3 -b atcoder.pyx')
-
-
-
-from atcoder import SccGraph, MfGraph
-
-read = sys.stdin.buffer.read
-readline = sys.stdin.buffer.readline
-readlines = sys.stdin.buffer.readlines
-
-N, M = list(map(int, readline().split()))
-AB = [list(map(int, readline().split())) for i in range(M)]
-
-SccGraph(3)
