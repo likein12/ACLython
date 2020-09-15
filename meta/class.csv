@@ -1,5 +1,7 @@
 Dsu,datastructure/dsu.pyx
 FenwickTree,datastructure/fenwicktree.pyx
+SegTree,datastructure/segtree.pyx
+LazySegTree,datastructure/segtree.pyx
 MfGraph,graph/mf_graph.pyx
 McfGraph,graph/mcf_graph.pyx
 SccGraph,graph/scc.pyx

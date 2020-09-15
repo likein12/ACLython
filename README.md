@@ -9,10 +9,10 @@
 | ---- | ---- | ---- | 
 |Dsu|dsu|〇|
 |FenwickTree|fenwick_tree|〇|
-|LazySegTree|lazy_segtree| |
-|SegTree|segtree| |
+|SegTree|segtree|〇|
+|LazySegTree|lazysegtree|△|
 |MfGraph|mf_graph|〇|
-|McfGraph|mcf_graph|△|
+|McfGraph|mcf_graph|〇|
 |SccGraph|scc_graph|〇|
 |TwoSat|two_sat|〇|
 |Conv|convolution|〇|

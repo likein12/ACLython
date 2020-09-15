@@ -115,3 +115,15 @@ def SegTree(v, op):
         return SegTreeMax(v)
     elif op == "add":
         return SegTreeAdd(v)
+
+cdef extern from "<atcoder/segtree>" namespace "atcoder" nogil: 
+    cdef cppclass lazysegtree[S, OP, E, F, M, CMP, ID]: 
+        lazysegtree(vector[S] v)
+        void set(int p, S x)
+        S get(int p)
+        S prod(int l, int r)
+        S all_prod()
+        void apply(int p, S x)
+        void apply(int l, int r, S x)
+        int max_right[G](int l)
+        int min_left[G](int r)
