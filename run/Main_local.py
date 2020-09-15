@@ -2,7 +2,7 @@
 code = """
 
 # distutils: language=c++
-# distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/deoxy/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
 

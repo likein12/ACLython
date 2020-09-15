@@ -1,4 +1,4 @@
-from atcoder import FenwickTree
+from atcoder import FenwickTree, MfGraph
  
 N,Q = list(map(int,input().split()))
 A = list(map(int,input().split()))
