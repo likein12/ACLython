@@ -35,6 +35,15 @@ C++のSTLのwrap
 |Set|set|〇|
 |MultiSet|multiset| |
 
+入出力関数
+|  wrapper名  |  C/C++関数  | 開発済 |
+| ---- | ---- | ---- | 
+|Read|get_char|〇|
+|ReadInt|get_char|〇|
+|PrintLong|printf|〇|
+|printLongN|printf|〇|
+
+
 ## 使い方
 
 ###  導入法
