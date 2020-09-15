@@ -12,8 +12,9 @@
 |LazySegTree|lazy_segtree| |
 |SegTree|segtree| |
 |MfGraph|mf_graph|〇|
+|McfGraph|mcf_graph|△|
 |SccGraph|scc_graph|〇|
-|TwoSat|two_sat| |
+|TwoSat|two_sat|〇|
 |Conv|convolution|〇|
 |ConvL|convolution_ll|〇|
 |Crt|crt|〇|
