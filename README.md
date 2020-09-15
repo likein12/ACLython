@@ -21,6 +21,7 @@
 |SuffixArray|suffix_array| |
 |LcpArray|lcp_array| |
 |ZAlgorithm|z_algorithm| |
+
 他のライブラリも鋭意作成中。
 
 C++のsetやmultisetなどのwrapもやってみたい。

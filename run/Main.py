@@ -2,7 +2,7 @@
 code = """
 
 # distutils: language=c++
-# distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
 
@@ -75,9 +75,10 @@ cdef class FenwickTree:
 """
 
 
-import os,sys
+import os, sys, getpass
 
 if sys.argv[-1] == 'ONLINE_JUDGE':
+    code.replace("USERNAME", getpass.getuser())
     open('atcoder.pyx','w').write(code)
     os.system('cythonize -i -3 -b atcoder.pyx')
     sys.exit(0)

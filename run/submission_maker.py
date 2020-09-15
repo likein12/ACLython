@@ -5,9 +5,10 @@ import getpass
 
 preprocess_code = """
 
-import os,sys
+import os, sys, getpass
 
 if sys.argv[-1] == 'ONLINE_JUDGE':
+    code.replace("USERNAME", getpass.getuser())
     open('atcoder.pyx','w').write(code)
     os.system('cythonize -i -3 -b atcoder.pyx')
     sys.exit(0)
@@ -33,7 +34,7 @@ cython_code = """
 code = \"\"\"
 
 # distutils: language=c++
-# distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
 
@@ -69,14 +70,10 @@ for class_name in class_set:
 
 cython_code += "\n".join(list(lib_set)) + "\n" + "\n".join(class_code_list) + "\n" + "\"\"\""
 
-cython_code_local = cython_code.replace("contestant", getpass.getuser())
-
 main_code = "\n".join([cython_code, preprocess_code, code])
-main_code_local = "\n".join([cython_code_local, preprocess_code, code])
 
 open("./Main.py", "w").write(main_code)
-open("./Main_local.py", "w").write(main_code_local)
 
 print("imported", ", ".join(class_set))
 
-print("created Main.py and Main_local.py")
+print("created Main.py")
