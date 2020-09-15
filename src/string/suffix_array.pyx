@@ -1,13 +1,9 @@
-
-code = """
-
 # distutils: language=c++
-# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
-
-from libcpp.string cimport string
 from libcpp.vector cimport vector
+from libcpp.string cimport string
 cdef extern from *:
     ctypedef long long ll "long long"
 
@@ -25,21 +21,3 @@ cpdef vector[int] SuffixArrayNum(vector[ll] s):
 
 cpdef vector[int] SuffixArrayNumUp(vector[int] s, int upper):
     return suffix_array(s, upper)
-"""
-
-
-import os, sys, getpass
-
-if sys.argv[-1] == 'ONLINE_JUDGE':
-    code.replace("USERNAME", getpass.getuser())
-    open('atcoder.pyx','w').write(code)
-    os.system('cythonize -i -3 -b atcoder.pyx')
-    sys.exit(0)
-
-
-from atcoder import SuffixArray
-
-def main():
-    print(*SuffixArray(input()))
-
-main()

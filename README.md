@@ -11,16 +11,20 @@
 |FenwickTree|fenwick_tree|〇|
 |LazySegTree|lazy_segtree| |
 |SegTree|segtree| |
-|MfGraph|mf_graph|△|
+|MfGraph|mf_graph|〇|
 |SccGraph|scc_graph|〇|
 |TwoSat|two_sat| |
 |Conv|convolution|〇|
-|Crt|crt| |
-|FloorSum|floor_sum| |
-|ModInt|modint| |
-|SuffixArray|suffix_array| |
-|LcpArray|lcp_array| |
-|ZAlgorithm|z_algorithm| |
+|ConvL|convolution_ll|〇|
+|Crt|crt|〇|
+|FloorSum|floor_sum|〇|
+|SuffixArray|suffix_array|〇|
+|SuffixArrayNum|suffix_array|〇|
+|SuffixArrayNumUp|suffix_array|〇|
+|LcpArray|lcp_array|〇|
+|LcpArrayNum|lcp_array|〇|
+|ZAlgorithm|z_algorithm|〇|
+|ZAlgorithmNum|z_algorithm|〇|
 
 他のライブラリも鋭意作成中。
 

@@ -1,5 +1,15 @@
 Conv,math/convolution.pyx
+ConvL,math/convolution.pyx
 MfGraph,graph/mf_graph.pyx
 SccGraph,graph/scc.pyx
 FenwickTree,datastructure/fenwicktree.pyx
 Dsu,datastructure/dsu.pyx
+Crt,math/crt.pyx
+FloorSum,math/floor_sum.pyx
+SuffixArray,string/suffix_array.pyx
+SuffixArrayNum,string/suffix_array.pyx
+SuffixArrayNumUp,string/suffix_array.pyx
+LcpArray,string/lcp_array.pyx
+LcpArrayNum,string/lcp_array.pyx
+ZAlgorithm,string/z_algorithm.pyx
+ZAlgorithmNum,string/z_algorithm.pyx

@@ -3,8 +3,18 @@
 # cython: boundscheck=False
 # cython: wraparound=False
 from libcpp.vector cimport vector
-cdef extern from "<atcoder/convolution>" namespace "atcoder":
-    vector[long] convolution(vector[long] &a, vector[long] &b)
 
-cpdef vector[long] Conv(vector[long] A, vector[long] B):
-    return convolution(A, B)
+cdef extern from *:
+    ctypedef int MOD_t "998244353"
+    ctypedef long long ll "long long"
+
+cdef extern from "<atcoder/convolution>" namespace "atcoder":
+    vector[int] convolution[M](vector[int] a, vector[int] b)
+    vector[ll] convolution_ll(vector[ll] a, vector[ll] b)
+
+cpdef vector[int] Conv(vector[int] a, vector[int] b):
+    return convolution[MOD_t](a, b)
+
+cpdef vector[ll] ConvL(vector[ll] a, vector[ll] b):
+    return convolution_ll(a, b)
+

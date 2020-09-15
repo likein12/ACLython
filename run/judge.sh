@@ -2,7 +2,6 @@ echo ;
 echo Judge Started
 echo ;
 rm Main.py
-rm Main_local.py
 echo ====================================
 echo submission_maker.py message
 echo ====================================
