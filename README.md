@@ -9,10 +9,10 @@
 | ---- | ---- | ---- | 
 |Dsu|dsu|〇|
 |FenwickTree|fenwick_tree|〇|
-|LazySegTree|lazy_segtree| |
-|SegTree|segtree| |
+|SegTree|segtree|〇|
+|LazySegTree|lazysegtree|△|
 |MfGraph|mf_graph|〇|
-|McfGraph|mcf_graph|△|
+|McfGraph|mcf_graph|〇|
 |SccGraph|scc_graph|〇|
 |TwoSat|two_sat|〇|
 |Conv|convolution|〇|
@@ -29,7 +29,20 @@
 
 他のライブラリも鋭意作成中。
 
-C++のsetやmultisetなどのwrapもやってみたい。
+C++のSTLのwrap
+|  wrapper名  |  STL  | 開発済 |
+| ---- | ---- | ---- | 
+|Set|set|〇|
+|MultiSet|multiset| |
+
+入出力関数
+|  wrapper名  |  C/C++関数  | 開発済 |
+| ---- | ---- | ---- | 
+|Read|get_char|〇|
+|ReadInt|get_char|〇|
+|PrintLong|printf|〇|
+|printLongN|printf|〇|
+
 
 ## 使い方
 

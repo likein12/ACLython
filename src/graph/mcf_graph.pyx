@@ -35,23 +35,28 @@ cdef class McfGraph:
         return self._thisptr.flow(s, t)
     cpdef pair[int, ll] flow_with_limit(self, int s, int t, int flow_limit):
         return self._thisptr.flow(s, t, flow_limit)
+    cpdef vector[pair[Cap, Cost]] slope(self, int s, int t):
+        return self._thisptr.slope(s, t)
+    cpdef vector[pair[Cap, Cost]] slope(self, int s, int t, Cap flow_limit):
+        return self._thisptr.slope(s, t, flow_limit)
 
-    # 20.9.15ここまで
-    cpdef vector[pair[int, ll]] get_edge(self, int i):
-        cdef mf_graph[int].edge *e = new mcf_graph[int, ll].edge(self._thisptr.get_edge(i))
-        cdef vector[pair, ll] *ret_e = new vector[int]()        
-        ret_e.push_back(e.frm)
-        ret_e.push_back(e.to)
-        ret_e.push_back(e.cap)
-        ret_e.push_back(e.flow)
+    cpdef pair[vector[int], ll] get_edge(self, int i):
+        cdef mcf_graph[int, ll].edge *e = new mcf_graph[int, ll].edge(self._thisptr.get_edge(i))
+        cdef pair[vector[int], ll] *ret_e = new pair[vector[int], ll]()        
+        ret_e.first.push_back(e.frm)
+        ret_e.first.push_back(e.to)
+        ret_e.first.push_back(e.cap)
+        ret_e.first.push_back(e.flow)
+        ret_e.second = e.cost
         return ret_e[0]
 
-    cpdef vector[pair[int, ll]] edges(self):
-        cdef vector[mf_graph[int].edge] es = self._thisptr.edges()
-        cdef vector[vector[int]] *ret_es = new vector[vector[int]](es.size())
+    cpdef vector[pair[vector[int], ll]] edges(self):
+        cdef vector[mcf_graph[int, ll].edge] es = self._thisptr.edges()
+        cdef vector[pair[vector[int], ll]] *ret_es = new vector[pair[vector[int], ll]](es.size())
         for i in range(es.size()):
-            ret_es.at(i).push_back(es.at(i).frm)
-            ret_es.at(i).push_back(es.at(i).to)
-            ret_es.at(i).push_back(es.at(i).cap)
-            ret_es.at(i).push_back(es.at(i).flow)
+            ret_es.at(i).first.push_back(es.at(i).frm)
+            ret_es.at(i).first.push_back(es.at(i).to)
+            ret_es.at(i).first.push_back(es.at(i).cap)
+            ret_es.at(i).first.push_back(es.at(i).flow)
+            ret_es.at(i).second = es.at(i).cost
         return ret_es[0]

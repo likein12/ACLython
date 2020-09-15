@@ -1,5 +1,7 @@
 Dsu,datastructure/dsu.pyx
 FenwickTree,datastructure/fenwicktree.pyx
+SegTree,datastructure/segtree.pyx
+LazySegTree,datastructure/segtree.pyx
 MfGraph,graph/mf_graph.pyx
 McfGraph,graph/mcf_graph.pyx
 SccGraph,graph/scc.pyx
@@ -15,3 +17,9 @@ LcpArray,string/lcp_array.pyx
 LcpArrayNum,string/lcp_array.pyx
 ZAlgorithm,string/z_algorithm.pyx
 ZAlgorithmNum,string/z_algorithm.pyx
+Read,utility/stdio.pyx
+ReadInt,utility/stdio.pyx
+PrintLongN,utility/stdio.pyx
+PrintLong,utility/stdio.pyx
+Set,stl/set.pyx
+MultiSet,stl/multiset.pyx
