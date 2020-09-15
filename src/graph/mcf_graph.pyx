@@ -35,9 +35,9 @@ cdef class McfGraph:
         return self._thisptr.flow(s, t)
     cpdef pair[int, ll] flow_with_limit(self, int s, int t, int flow_limit):
         return self._thisptr.flow(s, t, flow_limit)
-    cpdef vector[pair[Cap, Cost]] slope(int s, int t):
+    cpdef vector[pair[Cap, Cost]] slope(self, int s, int t):
         return self._thisptr.slope(s, t)
-    cpdef vector[pair[Cap, Cost]] slope(int s, int t, Cap flow_limit):
+    cpdef vector[pair[Cap, Cost]] slope(self, int s, int t, Cap flow_limit):
         return self._thisptr.slope(s, t, flow_limit)
 
     cpdef pair[vector[int], ll] get_edge(self, int i):
