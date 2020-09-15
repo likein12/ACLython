@@ -19,3 +19,5 @@ Read,utility/stdio.pyx
 ReadInt,utility/stdio.pyx
 PrintLongN,utility/stdio.pyx
 PrintLong,utility/stdio.pyx
+Set,stl/set.pyx
+MultiSet,stl/multiset.pyx
