@@ -1,15 +1,11 @@
-
-code = """
-
 # distutils: language=c++
-# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
-
+from libcpp.set cimport set
+from libcpp cimport bool
 from cython.operator cimport preincrement
 from cython.operator cimport predecrement
-from libcpp cimport bool
-from libcpp.set cimport set
 from cython.operator cimport dereference
 cdef extern from *:
     ctypedef long long ll "long long"
@@ -57,26 +53,3 @@ cdef class Set:
             return False
         else:
             return True
-"""
-
-
-import os, sys, getpass
-
-if sys.argv[-1] == 'ONLINE_JUDGE':
-    code.replace("USERNAME", getpass.getuser())
-    open('atcoder.pyx','w').write(code)
-    os.system('cythonize -i -3 -b atcoder.pyx')
-    sys.exit(0)
-
-
-from atcoder import Set
-
-s = Set()
-
-l = [1,2,4,5,6]
-for i in l:
-    s.add(i)
-
-print(s.pop_max())
-print(s.pop_max())
-print(s.pop_max())

@@ -29,7 +29,11 @@
 
 他のライブラリも鋭意作成中。
 
-C++のsetやmultisetなどのwrapもやってみたい。
+C++のSTLのwrap
+|  wrapper名  |  STL  | 開発済 |
+| ---- | ---- | ---- | 
+|Set|set|〇|
+|MultiSet|multiset| |
 
 ## 使い方
 
