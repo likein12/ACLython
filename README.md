@@ -7,15 +7,23 @@
 
 |  wrapper名  |  ACL  | 開発済 |
 | ---- | ---- | ---- | 
-|Conv|convolution|〇|
 |Dsu|dsu|〇|
 |FenwickTree|fenwick_tree|〇|
 |LazySegTree|lazy_segtree| |
 |SegTree|segtree| |
-|MfGraph|mf_graph|〇|
+|MfGraph|mf_graph|△|
 |SccGraph|scc_graph|〇|
-
+|TwoSat|two_sat| |
+|Conv|convolution|〇|
+|Crt|crt| |
+|FloorSum|floor_sum| |
+|ModInt|modint| |
+|SuffixArray|suffix_array| |
+|LcpArray|lcp_array| |
+|ZAlgorithm|z_algorithm| |
 他のライブラリも鋭意作成中。
+
+C++のsetやmultisetなどのwrapもやってみたい。
 
 ## 使い方
 
