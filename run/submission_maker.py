@@ -8,7 +8,7 @@ preprocess_code = """
 import os, sys, getpass
 
 if sys.argv[-1] == 'ONLINE_JUDGE':
-    code.replace("USERNAME", getpass.getuser())
+    code = code.replace("USERNAME", getpass.getuser())
     open('atcoder.pyx','w').write(code)
     os.system('cythonize -i -3 -b atcoder.pyx')
     sys.exit(0)

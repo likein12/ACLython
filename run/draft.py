@@ -1,5 +1,20 @@
-from atcoder import Read, ZAlgorithm, PrintLong
+from atcoder import ReadInt, SegTree, PrintLongN
 
-A = Read(1)
-ans = ZAlgorithm(A[0])
-PrintLong(ans, len(ans))
+N,Q = ReadInt(2)
+ST = SegTree(ReadInt(N), "max")
+
+ans = []
+for i in range(Q):
+    T = ReadInt(1)[0]
+    if T==1:
+        X,V = ReadInt(2)
+        X -= 1
+        ST.set(X,V)
+    elif T==2:
+        L,R = ReadInt(2)
+        ans.append(ST.prod(L-1,R-1))
+    else:
+        X,V = ReadInt(2)
+        X -= 1
+        ans.append(ST.max_right(X,V)+1)
+print(*ans,sep="\n")

@@ -9,8 +9,8 @@
 | ---- | ---- | ---- | 
 |Dsu|dsu|〇|
 |FenwickTree|fenwick_tree|〇|
-|SegTree|segtree|〇|
-|LazySegTree|lazysegtree|△|
+|SegTree|segtree| |
+|LazySegTree|lazysegtree| |
 |MfGraph|mf_graph|〇|
 |McfGraph|mcf_graph|〇|
 |SccGraph|scc_graph|〇|
