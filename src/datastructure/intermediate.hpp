@@ -1,3 +1,4 @@
+
 #include <vector>
 #include <algorithm>
 #include <cassert>
@@ -135,7 +136,7 @@ struct segtree_min {
         int get(int p) {return seg.get(p);}
         int prod(int l, int r) {return seg.prod(l, r);}
         int all_prod() {return seg.all_prod();}
- 
+
         int max_right(int l, int v) {return seg.max_right(l, v, [](int x, int y) { return x<y; });}
         int min_left(int r, int v) {return seg.min_left(r, v, [](int x, int y) { return x<y; });}
 
@@ -161,7 +162,7 @@ struct segtree_max {
         int get(int p) {return seg.get(p);}
         int prod(int l, int r) {return seg.prod(l, r);}
         int all_prod() {return seg.all_prod();}
- 
+
         int max_right(int l, int v) {return seg.max_right(l, v, [](int x, int y) { return x<y; });}
         int min_left(int r, int v) {return seg.min_left(r, v, [](int x, int y) { return x<y; });}
 

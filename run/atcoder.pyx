@@ -5,10 +5,10 @@
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.string cimport string
-from libcpp cimport bool
-from libcpp.vector cimport vector
 from libc.stdio cimport getchar, printf
+from libcpp.string cimport string
+from libcpp.vector cimport vector
+from libcpp cimport bool
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
     cdef vector[int] *v = new vector[int]()

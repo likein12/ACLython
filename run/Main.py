@@ -136,7 +136,7 @@ struct segtree_min {
         int get(int p) {return seg.get(p);}
         int prod(int l, int r) {return seg.prod(l, r);}
         int all_prod() {return seg.all_prod();}
- 
+
         int max_right(int l, int v) {return seg.max_right(l, v, [](int x, int y) { return x<y; });}
         int min_left(int r, int v) {return seg.min_left(r, v, [](int x, int y) { return x<y; });}
 
@@ -162,7 +162,7 @@ struct segtree_max {
         int get(int p) {return seg.get(p);}
         int prod(int l, int r) {return seg.prod(l, r);}
         int all_prod() {return seg.all_prod();}
- 
+
         int max_right(int l, int v) {return seg.max_right(l, v, [](int x, int y) { return x<y; });}
         int min_left(int r, int v) {return seg.min_left(r, v, [](int x, int y) { return x<y; });}
 
@@ -172,9 +172,7 @@ struct segtree_max {
 
 
 }
-
 """
-
 
 code = """
 
@@ -183,10 +181,10 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.string cimport string
-from libcpp cimport bool
-from libcpp.vector cimport vector
 from libc.stdio cimport getchar, printf
+from libcpp.string cimport string
+from libcpp.vector cimport vector
+from libcpp cimport bool
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
     cdef vector[int] *v = new vector[int]()
@@ -305,7 +303,7 @@ for i in range(Q):
         ST.set(X,V)
     elif T==2:
         L,R = ReadInt(2)
-        ans.append(ST.prod(L-1,R-1))
+        ans.append(ST.prod(L-1,R))
     else:
         X,V = ReadInt(2)
         X -= 1

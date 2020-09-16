@@ -3,12 +3,15 @@ import os
 import sys
 import getpass
 
+header_code = "header_code = \"\"\"\n" + "\n".join([line.rstrip() for line in open('./src/datastructure/intermediate.hpp', 'r')]) + "\n\"\"\""
+
 preprocess_code = """
 
 import os, sys, getpass
 
 if sys.argv[-1] == 'ONLINE_JUDGE':
     code = code.replace("USERNAME", getpass.getuser())
+    open('intermediate.hpp','w').write(header_code)
     open('atcoder.pyx','w').write(code)
     os.system('cythonize -i -3 -b atcoder.pyx')
     sys.exit(0)
@@ -71,7 +74,7 @@ for class_path in class_set:
 
 cython_code += "\n".join(list(lib_set)) + "\n" + "\n".join(class_code_list) + "\n" + "\"\"\""
 
-main_code = "\n".join([cython_code, preprocess_code, code])
+main_code = "\n".join([header_code, cython_code, preprocess_code, code])
 
 open("./Main.py", "w").write(main_code)
 

@@ -12,9 +12,9 @@ for i in range(Q):
         ST.set(X,V)
     elif T==2:
         L,R = ReadInt(2)
-        ans.append(ST.prod(L-1,R-1))
+        ans.append(ST.prod(L-1,R))
     else:
         X,V = ReadInt(2)
         X -= 1
         ans.append(ST.max_right(X,V)+1)
-print(*ans,sep="\n")
+PrintLongN(ans,len(ans))

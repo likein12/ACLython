@@ -641,13 +641,13 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__atcoder
 /* Early includes */
 #include <string.h>
+#include <stdio.h>
 #include "ios"
 #include "new"
 #include "stdexcept"
 #include "typeinfo"
 #include <string>
 #include <vector>
-#include <stdio.h>
 #include "./intermediate.hpp"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1316,13 +1316,13 @@ static int __pyx_f_7atcoder_10SegTreeMax_min_left(struct __pyx_obj_7atcoder_SegT
 
 /* Module declarations from 'libc.string' */
 
-/* Module declarations from 'libcpp.string' */
+/* Module declarations from 'libc.stdio' */
 
-/* Module declarations from 'libcpp' */
+/* Module declarations from 'libcpp.string' */
 
 /* Module declarations from 'libcpp.vector' */
 
-/* Module declarations from 'libc.stdio' */
+/* Module declarations from 'libcpp' */
 
 /* Module declarations from 'atcoder' */
 static PyTypeObject *__pyx_ptype_7atcoder_SegTreeMin = 0;
@@ -1450,7 +1450,7 @@ static PyObject *__pyx_codeobj__6;
 
 /* "atcoder.pyx":12
  * from libcpp.vector cimport vector
- * from libc.stdio cimport getchar, printf
+ * from libcpp cimport bool
  * cpdef inline vector[int] ReadInt(int n):             # <<<<<<<<<<<<<<
  *     cdef int b, c
  *     cdef vector[int] *v = new vector[int]()
@@ -1578,7 +1578,7 @@ static CYTHON_INLINE std::vector<int>  __pyx_f_7atcoder_ReadInt(int __pyx_v_n, C
 
   /* "atcoder.pyx":12
  * from libcpp.vector cimport vector
- * from libc.stdio cimport getchar, printf
+ * from libcpp cimport bool
  * cpdef inline vector[int] ReadInt(int n):             # <<<<<<<<<<<<<<
  *     cdef int b, c
  *     cdef vector[int] *v = new vector[int]()
