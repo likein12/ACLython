@@ -1,4 +1,4 @@
-
+#include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
 #include <vector>
 #include <algorithm>
 #include <cassert>
@@ -6,18 +6,12 @@
 
 namespace aclython {
 
-int ceil_pow2(int n) {
-    int x = 0;
-    while ((1U << x) < (unsigned int)(n)) x++;
-    return x;
-}
-
 template <class S, S (*op)(S, S), S (*e)()> struct segtree {
   public:
     segtree() : segtree(0) {}
     segtree(int n) : segtree(std::vector<S>(n, e())) {}
     segtree(const std::vector<S>& v) : _n(int(v.size())) {
-        log = ceil_pow2(_n);
+        log = internal::ceil_pow2(_n);
         size = 1 << log;
         d = std::vector<S>(2 * size, e());
         for (int i = 0; i < _n; i++) d[size + i] = v[i];

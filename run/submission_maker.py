@@ -3,7 +3,7 @@ import os
 import sys
 import getpass
 
-header_code = "header_code = \"\"\"\n" + "\n".join([line.rstrip() for line in open('./src/datastructure/intermediate.hpp', 'r')]) + "\n\"\"\""
+header_code = "header_code = \"\"\"\n" + "\n".join([line.rstrip() for line in open('./intermediate.hpp', 'r')]) + "\n\"\"\""
 
 preprocess_code = """
 

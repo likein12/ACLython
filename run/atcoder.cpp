@@ -640,14 +640,14 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__atcoder
 #define __PYX_HAVE_API__atcoder
 /* Early includes */
-#include <string.h>
-#include <stdio.h>
 #include "ios"
 #include "new"
 #include "stdexcept"
 #include "typeinfo"
-#include <string>
 #include <vector>
+#include <string.h>
+#include <string>
+#include <stdio.h>
 #include "./intermediate.hpp"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1314,15 +1314,15 @@ static int __pyx_f_7atcoder_10SegTreeMax_all_prod(struct __pyx_obj_7atcoder_SegT
 static int __pyx_f_7atcoder_10SegTreeMax_max_right(struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self, int __pyx_v_l, int __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
 static int __pyx_f_7atcoder_10SegTreeMax_min_left(struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self, int __pyx_v_r, int __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
 
-/* Module declarations from 'libc.string' */
-
-/* Module declarations from 'libc.stdio' */
-
-/* Module declarations from 'libcpp.string' */
-
 /* Module declarations from 'libcpp.vector' */
 
 /* Module declarations from 'libcpp' */
+
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libcpp.string' */
+
+/* Module declarations from 'libc.stdio' */
 
 /* Module declarations from 'atcoder' */
 static PyTypeObject *__pyx_ptype_7atcoder_SegTreeMin = 0;
@@ -1449,8 +1449,8 @@ static PyObject *__pyx_codeobj__6;
 /* Late includes */
 
 /* "atcoder.pyx":12
- * from libcpp.vector cimport vector
- * from libcpp cimport bool
+ * from libcpp.string cimport string
+ * from libc.stdio cimport getchar, printf
  * cpdef inline vector[int] ReadInt(int n):             # <<<<<<<<<<<<<<
  *     cdef int b, c
  *     cdef vector[int] *v = new vector[int]()
@@ -1577,8 +1577,8 @@ static CYTHON_INLINE std::vector<int>  __pyx_f_7atcoder_ReadInt(int __pyx_v_n, C
   goto __pyx_L0;
 
   /* "atcoder.pyx":12
- * from libcpp.vector cimport vector
- * from libcpp cimport bool
+ * from libcpp.string cimport string
+ * from libc.stdio cimport getchar, printf
  * cpdef inline vector[int] ReadInt(int n):             # <<<<<<<<<<<<<<
  *     cdef int b, c
  *     cdef vector[int] *v = new vector[int]()
