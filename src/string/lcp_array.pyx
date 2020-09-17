@@ -11,7 +11,7 @@ cdef extern from "<atcoder/string>" namespace "atcoder":
     vector[int] lcp_array(string s, vector[int] sa)
     vector[int] lcp_array[ll](vector[ll] s, vector[int] sa)
 
-def LcpArray(s, sa):
+cpdef vector[int] LcpArray(string s, vector[int] sa):
     return lcp_array(s, sa)
 
 cpdef vector[int] LcpArrayNum(vector[ll] s, vector[int] sa):

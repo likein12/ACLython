@@ -1,15 +1,11 @@
-from atcoder import SccGraph, ReadInt
+from atcoder import Read, SuffixArray, LcpArray
 
 def main():
-    N, M = ReadInt(2)
-    sg = SccGraph(N)
-    for i in range(M):
-        a, b = ReadInt(2)
-        sg.add_edge(a, b)
-    ans = sg.scc()
-    print(len(ans))
-    for i in range(len(ans)):
-        print(len(ans[i]),*ans[i])
-
+    S = Read(1)[0]
+    sa = SuffixArray(S)
+    ans = (len(S) * (len(S)+1))//2
+    for x in LcpArray(S, sa):
+        ans -= x
+    print(ans)
 if __name__=="__main__":
     main()

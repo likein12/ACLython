@@ -1,17 +1,4 @@
 header_code = """
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
 #include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
 #include "/opt/atcoder-stl/atcoder/modint.hpp"
@@ -233,9 +220,21 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libc.stdio cimport getchar, printf
-from libcpp.vector cimport vector
 from libcpp.string cimport string
+from libcpp.vector cimport vector
+from libc.stdio cimport getchar, printf
+cdef extern from *:
+    ctypedef long long ll "long long"
+
+cdef extern from "<atcoder/string>" namespace "atcoder":
+    vector[int] lcp_array(string s, vector[int] sa)
+    vector[int] lcp_array[ll](vector[ll] s, vector[int] sa)
+
+cpdef vector[int] LcpArray(string s, vector[int] sa):
+    return lcp_array(s, sa)
+
+cpdef vector[int] LcpArrayNum(vector[ll] s, vector[int] sa):
+    return lcp_array(s, sa)
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
     cdef vector[int] *v = new vector[int]()
@@ -266,20 +265,22 @@ cpdef inline void PrintLongN(vector[long] l, int n):
 
 cpdef inline void PrintLong(vector[long] l, int n):
     for i in range(n): printf("%ld ", l[i])
-cdef extern from "<atcoder/scc>" namespace "atcoder":
-    cdef cppclass scc_graph:
-        scc_graph(int n)
-        void add_edge(int fr, int to)
-        vector[vector[int]] scc()
+cdef extern from *:
+    ctypedef long long ll "long long"
 
-cdef class SccGraph:
-    cdef scc_graph *_thisptr
-    def __cinit__(self, int n):
-        self._thisptr = new scc_graph(n)
-    cpdef void add_edge(self, int fr, int to):
-        self._thisptr.add_edge(fr, to)
-    cpdef vector[vector[int]] scc(self):
-        return self._thisptr.scc()
+cdef extern from "<atcoder/string>" namespace "atcoder":
+    vector[int] suffix_array(string s)
+    vector[int] suffix_array[ll](vector[ll] s)
+    vector[int] suffix_array(vector[int] s, int upper)
+
+cpdef vector[int] SuffixArray(string s):
+    return suffix_array(s)
+
+cpdef vector[int] SuffixArrayNum(vector[ll] s):
+    return suffix_array(s)
+
+cpdef vector[int] SuffixArrayNumUp(vector[int] s, int upper):
+    return suffix_array(s, upper)
 """
 
 
@@ -293,18 +294,14 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import SccGraph, ReadInt
+from atcoder import Read, SuffixArray, LcpArray
 
 def main():
-    N, M = ReadInt(2)
-    sg = SccGraph(N)
-    for i in range(M):
-        a, b = ReadInt(2)
-        sg.add_edge(a, b)
-    ans = sg.scc()
-    print(len(ans))
-    for i in range(len(ans)):
-        print(len(ans[i]),*ans[i])
-
+    S = Read(1)[0]
+    sa = SuffixArray(S)
+    ans = (len(S) * (len(S)+1))//2
+    for x in LcpArray(S, sa):
+        ans -= x
+    print(ans)
 if __name__=="__main__":
     main()
