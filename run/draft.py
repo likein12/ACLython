@@ -1,20 +1,22 @@
-from atcoder import ReadInt, SegTree, PrintLongN
+from atcoder import ReadInt, LazySegTree, PrintLongN
 
-N,Q = ReadInt(2)
-ST = SegTree(ReadInt(N), "max")
+def main():
+    N,Q = ReadInt(2)
 
-ans = []
-for i in range(Q):
-    T = ReadInt(1)[0]
-    if T==1:
-        X,V = ReadInt(2)
-        X -= 1
-        ST.set(X,V)
-    elif T==2:
-        L,R = ReadInt(2)
-        ans.append(ST.prod(L-1,R))
-    else:
-        X,V = ReadInt(2)
-        X -= 1
-        ans.append(ST.max_right(X,V)+1)
-PrintLongN(ans,len(ans))
+    A = ReadInt(N)
+    ans = []
+    AS = [[a,1] for a in A]
+    ST = LazySegTree(AS)
+    for i in range(Q):
+        t = ReadInt(1)[0]
+        if t==0:
+            l,r,c,d = ReadInt(4)
+            ST.apply_range(l,r,[c,d])
+        else:
+            l,r = ReadInt(2)
+            ans.append(ST.prod(l,r)[0])
+    PrintLongN(ans,len(ans))
+
+
+if __name__=="__main__":
+    main()

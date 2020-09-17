@@ -2,11 +2,22 @@ header_code = """
 
 
 
+
+
+
+
+
+
+
+
+
+
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
+#include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
+#include "/opt/atcoder-stl/atcoder/modint.hpp"
 #include <vector>
 #include <algorithm>
 #include <cassert>
-#include <vector>
 
 namespace aclython {
 
@@ -168,6 +179,49 @@ struct segtree_max {
         segtree<int, max_op, max_e> seg;
 };
 
+using mint = atcoder::modint998244353;
+
+struct S {
+    mint a;
+    int size;
+    S(mint _a, int _size) : a(_a) ,size(_size) {}
+    S(int _a, int _size) : a(_a) ,size(_size) {}
+    S(const S &s) : a(s.a), size(s.size) {}
+    int get_a() { return (int)a.val(); }
+};
+
+struct F {
+    mint a, b;
+    F(mint _a, mint _b) : a(_a), b(_b) {}
+    F(int _a, int _b) : a(_a), b(_b) {}
+    F(const F &f) : a(f.a), b(f.b) {}
+    int get_a() { return (int)a.val(); }
+    int get_b() { return (int)b.val(); }
+};
+
+S op(S l, S r) { return S{l.a + r.a, l.size + r.size}; }
+
+S e() { return S{0, 0}; }
+
+S mapping(F l, S r) { return S{r.a * l.a + r.size * l.b, r.size}; }
+
+F composition(F l, F r) { return F{r.a * l.a, r.b * l.a + l.b}; }
+
+F id() { return F{1, 0}; }
+
+struct lazy_segtree{
+    lazy_segtree() : lazy_segtree(0) {}
+    lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
+    lazy_segtree(const std::vector<S>& vec) : seg(vec) {}
+    void set(int p, S x) { seg.set(p, x); }
+    S get(int p) { return seg.get(p); }
+    S prod(int l, int r) { return seg.prod(l, r); }
+    S all_prod() { return seg.all_prod(); }
+    void apply(int p, F f) { seg.apply(p, f); }
+    void apply(int l, int r, F f) { seg.apply(l, r, f); }
+    private:
+        atcoder::lazy_segtree<S, op, e, F, mapping, composition, id> seg;
+};
 
 }
 """
@@ -179,9 +233,9 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.vector cimport vector
 from libcpp cimport bool
 from libcpp.string cimport string
+from libcpp.vector cimport vector
 from libc.stdio cimport getchar, printf
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
@@ -274,6 +328,66 @@ def SegTree(v, op):
     elif op=="max":
         return SegTreeMax(v)
 
+cdef extern from *:
+    ctypedef long long ll "long long"
+
+cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
+    cdef cppclass S:
+        S(int, int)
+        S(S &)
+        int get_a()
+        int size
+    cdef cppclass F:
+        F(int, int)
+        F(F &)
+        int get_a()
+        int get_b()
+    cdef cppclass lazy_segtree:
+        lazy_segtree(vector[S] v)
+        void set(int p, S x)
+        S get(int p)
+        S prod(int l, int r)
+        S all_prod()
+        void apply(int p, F f)
+        void apply(int l, int r, F f)
+
+cdef class LazySegTree:
+    cdef lazy_segtree *_thisptr
+    def __cinit__(self, vector[vector[int]] v):
+        cdef int n = v.size()
+        cdef vector[S] *sv = new vector[S]()
+        cdef S *s
+        for i in range(n):
+            s = new S(v.at(i).at(0), v.at(i).at(1))
+            sv.push_back(s[0])
+        self._thisptr = new lazy_segtree(sv[0])
+    cpdef void set(self, int p, vector[int] v):
+        cdef S *s = new S(v.at(0), v.at(1))
+        self._thisptr.set(p, s[0])
+    cpdef vector[int] get(self, int p):
+        cdef S *s = new S(self._thisptr.get(p))
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef vector[int] prod(self, int l, int r):
+        cdef S *s = new S(self._thisptr.prod(l, r))
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef vector[int] all_prod(self):
+        cdef S *s = new S(self._thisptr.all_prod())
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef void apply(self, int p, vector[int] v):
+        cdef F *f = new F(v.at(0), v.at(1))
+        self._thisptr.apply(p, f[0])
+    cpdef void apply_range(self, int l, int r, vector[int] v):
+        cdef F *f = new F(v.at(0), v.at(1))
+        self._thisptr.apply(l, r, f[0])
 """
 
 
@@ -287,23 +401,25 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import ReadInt, SegTree, PrintLongN
+from atcoder import ReadInt, LazySegTree, PrintLongN
 
-N,Q = ReadInt(2)
-ST = SegTree(ReadInt(N), "max")
+def main():
+    N,Q = ReadInt(2)
 
-ans = []
-for i in range(Q):
-    T = ReadInt(1)[0]
-    if T==1:
-        X,V = ReadInt(2)
-        X -= 1
-        ST.set(X,V)
-    elif T==2:
-        L,R = ReadInt(2)
-        ans.append(ST.prod(L-1,R))
-    else:
-        X,V = ReadInt(2)
-        X -= 1
-        ans.append(ST.max_right(X,V)+1)
-PrintLongN(ans,len(ans))
+    A = ReadInt(N)
+    ans = []
+    AS = [[a,1] for a in A]
+    ST = LazySegTree(AS)
+    for i in range(Q):
+        t = ReadInt(1)[0]
+        if t==0:
+            l,r,c,d = ReadInt(4)
+            ST.apply_range(l,r,[c,d])
+        else:
+            l,r = ReadInt(2)
+            ans.append(ST.prod(l,r)[0])
+    PrintLongN(ans,len(ans))
+
+
+if __name__=="__main__":
+    main()

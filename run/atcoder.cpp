@@ -640,13 +640,13 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__atcoder
 #define __PYX_HAVE_API__atcoder
 /* Early includes */
+#include <string.h>
 #include "ios"
 #include "new"
 #include "stdexcept"
 #include "typeinfo"
-#include <vector>
-#include <string.h>
 #include <string>
+#include <vector>
 #include <stdio.h>
 #include "./intermediate.hpp"
 #ifdef _OPENMP
@@ -864,6 +864,7 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_7atcoder_SegTreeMin;
 struct __pyx_obj_7atcoder_SegTreeMax;
+struct __pyx_obj_7atcoder_LazySegTree;
 
 /* "atcoder.pyx":52
  *         int min_left(int r, int v)
@@ -890,6 +891,20 @@ struct __pyx_obj_7atcoder_SegTreeMax {
   PyObject_HEAD
   struct __pyx_vtabstruct_7atcoder_SegTreeMax *__pyx_vtab;
   aclython::segtree_max *_thisptr;
+};
+
+
+/* "atcoder.pyx":126
+ *         void apply(int l, int r, F f)
+ * 
+ * cdef class LazySegTree:             # <<<<<<<<<<<<<<
+ *     cdef lazy_segtree *_thisptr
+ *     def __cinit__(self, vector[vector[int]] v):
+ */
+struct __pyx_obj_7atcoder_LazySegTree {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_7atcoder_LazySegTree *__pyx_vtab;
+  aclython::lazy_segtree *_thisptr;
 };
 
 
@@ -930,6 +945,25 @@ struct __pyx_vtabstruct_7atcoder_SegTreeMax {
   int (*min_left)(struct __pyx_obj_7atcoder_SegTreeMax *, int, int, int __pyx_skip_dispatch);
 };
 static struct __pyx_vtabstruct_7atcoder_SegTreeMax *__pyx_vtabptr_7atcoder_SegTreeMax;
+
+
+/* "atcoder.pyx":126
+ *         void apply(int l, int r, F f)
+ * 
+ * cdef class LazySegTree:             # <<<<<<<<<<<<<<
+ *     cdef lazy_segtree *_thisptr
+ *     def __cinit__(self, vector[vector[int]] v):
+ */
+
+struct __pyx_vtabstruct_7atcoder_LazySegTree {
+  void (*set)(struct __pyx_obj_7atcoder_LazySegTree *, int, std::vector<int> , int __pyx_skip_dispatch);
+  std::vector<int>  (*get)(struct __pyx_obj_7atcoder_LazySegTree *, int, int __pyx_skip_dispatch);
+  std::vector<int>  (*prod)(struct __pyx_obj_7atcoder_LazySegTree *, int, int, int __pyx_skip_dispatch);
+  std::vector<int>  (*all_prod)(struct __pyx_obj_7atcoder_LazySegTree *, int __pyx_skip_dispatch);
+  void (*apply)(struct __pyx_obj_7atcoder_LazySegTree *, int, std::vector<int> , int __pyx_skip_dispatch);
+  void (*apply_range)(struct __pyx_obj_7atcoder_LazySegTree *, int, int, std::vector<int> , int __pyx_skip_dispatch);
+};
+static struct __pyx_vtabstruct_7atcoder_LazySegTree *__pyx_vtabptr_7atcoder_LazySegTree;
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1313,8 +1347,12 @@ static int __pyx_f_7atcoder_10SegTreeMax_prod(struct __pyx_obj_7atcoder_SegTreeM
 static int __pyx_f_7atcoder_10SegTreeMax_all_prod(struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
 static int __pyx_f_7atcoder_10SegTreeMax_max_right(struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self, int __pyx_v_l, int __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
 static int __pyx_f_7atcoder_10SegTreeMax_min_left(struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self, int __pyx_v_r, int __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
-
-/* Module declarations from 'libcpp.vector' */
+static void __pyx_f_7atcoder_11LazySegTree_set(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
+static std::vector<int>  __pyx_f_7atcoder_11LazySegTree_get(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, int __pyx_skip_dispatch); /* proto*/
+static std::vector<int>  __pyx_f_7atcoder_11LazySegTree_prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r, int __pyx_skip_dispatch); /* proto*/
+static std::vector<int>  __pyx_f_7atcoder_11LazySegTree_all_prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
+static void __pyx_f_7atcoder_11LazySegTree_apply(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
+static void __pyx_f_7atcoder_11LazySegTree_apply_range(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r, std::vector<int>  __pyx_v_v, int __pyx_skip_dispatch); /* proto*/
 
 /* Module declarations from 'libcpp' */
 
@@ -1322,17 +1360,21 @@ static int __pyx_f_7atcoder_10SegTreeMax_min_left(struct __pyx_obj_7atcoder_SegT
 
 /* Module declarations from 'libcpp.string' */
 
+/* Module declarations from 'libcpp.vector' */
+
 /* Module declarations from 'libc.stdio' */
 
 /* Module declarations from 'atcoder' */
 static PyTypeObject *__pyx_ptype_7atcoder_SegTreeMin = 0;
 static PyTypeObject *__pyx_ptype_7atcoder_SegTreeMax = 0;
+static PyTypeObject *__pyx_ptype_7atcoder_LazySegTree = 0;
 static CYTHON_INLINE std::vector<int>  __pyx_f_7atcoder_ReadInt(int, int __pyx_skip_dispatch); /*proto*/
 static CYTHON_INLINE std::vector<std::string>  __pyx_f_7atcoder_Read(int, int __pyx_skip_dispatch); /*proto*/
 static CYTHON_INLINE void __pyx_f_7atcoder_PrintLongN(std::vector<long> , int, int __pyx_skip_dispatch); /*proto*/
 static CYTHON_INLINE void __pyx_f_7atcoder_PrintLong(std::vector<long> , int, int __pyx_skip_dispatch); /*proto*/
 static std::vector<long>  __pyx_convert_vector_from_py_long(PyObject *); /*proto*/
 static std::vector<int>  __pyx_convert_vector_from_py_int(PyObject *); /*proto*/
+static std::vector<std::vector<int> >  __pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___(PyObject *); /*proto*/
 static PyObject *__pyx_convert_vector_to_py_int(const std::vector<int>  &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_std__in_string(std::string const &); /*proto*/
@@ -1362,6 +1404,7 @@ static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_prod[] = "prod";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_apply[] = "apply";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_SegTree[] = "SegTree";
@@ -1376,16 +1419,21 @@ static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_SegTreeMax[] = "SegTreeMax";
 static const char __pyx_k_SegTreeMin[] = "SegTreeMin";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static const char __pyx_k_LazySegTree[] = "LazySegTree";
+static const char __pyx_k_apply_range[] = "apply_range";
 static const char __pyx_k_atcoder_pyx[] = "atcoder.pyx";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
+static PyObject *__pyx_n_s_LazySegTree;
 static PyObject *__pyx_n_s_SegTree;
 static PyObject *__pyx_n_s_SegTreeMax;
 static PyObject *__pyx_n_s_SegTreeMin;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_all_prod;
+static PyObject *__pyx_n_s_apply;
+static PyObject *__pyx_n_s_apply_range;
 static PyObject *__pyx_n_s_atcoder;
 static PyObject *__pyx_kp_s_atcoder_pyx;
 static PyObject *__pyx_n_s_cline_in_traceback;
@@ -1438,18 +1486,30 @@ static PyObject *__pyx_pf_7atcoder_10SegTreeMax_12min_left(struct __pyx_obj_7atc
 static PyObject *__pyx_pf_7atcoder_10SegTreeMax_14__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_7atcoder_10SegTreeMax_16__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7atcoder_SegTreeMax *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_7atcoder_8SegTree(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_v, PyObject *__pyx_v_op); /* proto */
+static int __pyx_pf_7atcoder_11LazySegTree___cinit__(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, std::vector<std::vector<int> >  __pyx_v_v); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_2set(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_4get(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_6prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_8all_prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_10apply(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_12apply_range(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r, std::vector<int>  __pyx_v_v); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_14__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_16__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_7atcoder_SegTreeMin(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_7atcoder_SegTreeMax(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_7atcoder_LazySegTree(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
-static PyObject *__pyx_codeobj__6;
+static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__7;
+static PyObject *__pyx_codeobj__8;
 /* Late includes */
 
 /* "atcoder.pyx":12
- * from libcpp.string cimport string
+ * from libcpp.vector cimport vector
  * from libc.stdio cimport getchar, printf
  * cpdef inline vector[int] ReadInt(int n):             # <<<<<<<<<<<<<<
  *     cdef int b, c
@@ -1577,7 +1637,7 @@ static CYTHON_INLINE std::vector<int>  __pyx_f_7atcoder_ReadInt(int __pyx_v_n, C
   goto __pyx_L0;
 
   /* "atcoder.pyx":12
- * from libcpp.string cimport string
+ * from libcpp.vector cimport vector
  * from libc.stdio cimport getchar, printf
  * cpdef inline vector[int] ReadInt(int n):             # <<<<<<<<<<<<<<
  *     cdef int b, c
@@ -5094,6 +5154,7 @@ static PyObject *__pyx_pf_7atcoder_8SegTree(CYTHON_UNUSED PyObject *__pyx_self, 
  *     elif op=="max":
  *         return SegTreeMax(v)             # <<<<<<<<<<<<<<
  * 
+ * cdef extern from *:
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_7atcoder_SegTreeMax), __pyx_v_v); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
@@ -5127,6 +5188,1778 @@ static PyObject *__pyx_pf_7atcoder_8SegTree(CYTHON_UNUSED PyObject *__pyx_self, 
   __Pyx_AddTraceback("atcoder.SegTree", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":128
+ * cdef class LazySegTree:
+ *     cdef lazy_segtree *_thisptr
+ *     def __cinit__(self, vector[vector[int]] v):             # <<<<<<<<<<<<<<
+ *         cdef int n = v.size()
+ *         cdef vector[S] *sv = new vector[S]()
+ */
+
+/* Python wrapper */
+static int __pyx_pw_7atcoder_11LazySegTree_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_7atcoder_11LazySegTree_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  std::vector<std::vector<int> >  __pyx_v_v;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_v,0};
+    PyObject* values[1] = {0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 128, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+    }
+    __pyx_v_v = __pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 128, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 128, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return -1;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree___cinit__(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), __pyx_v_v);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_7atcoder_11LazySegTree___cinit__(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, std::vector<std::vector<int> >  __pyx_v_v) {
+  int __pyx_v_n;
+  std::vector<aclython::S>  *__pyx_v_sv;
+  aclython::S *__pyx_v_s;
+  int __pyx_v_i;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  std::vector<aclython::S>  *__pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  __Pyx_FakeReference<std::vector<int> > __pyx_t_5;
+  __Pyx_FakeReference<int> __pyx_t_6;
+  __Pyx_FakeReference<std::vector<int> > __pyx_t_7;
+  __Pyx_FakeReference<int> __pyx_t_8;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "atcoder.pyx":129
+ *     cdef lazy_segtree *_thisptr
+ *     def __cinit__(self, vector[vector[int]] v):
+ *         cdef int n = v.size()             # <<<<<<<<<<<<<<
+ *         cdef vector[S] *sv = new vector[S]()
+ *         cdef S *s
+ */
+  __pyx_v_n = __pyx_v_v.size();
+
+  /* "atcoder.pyx":130
+ *     def __cinit__(self, vector[vector[int]] v):
+ *         cdef int n = v.size()
+ *         cdef vector[S] *sv = new vector[S]()             # <<<<<<<<<<<<<<
+ *         cdef S *s
+ *         for i in range(n):
+ */
+  try {
+    __pyx_t_1 = new std::vector<aclython::S> ();
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 130, __pyx_L1_error)
+  }
+  __pyx_v_sv = __pyx_t_1;
+
+  /* "atcoder.pyx":132
+ *         cdef vector[S] *sv = new vector[S]()
+ *         cdef S *s
+ *         for i in range(n):             # <<<<<<<<<<<<<<
+ *             s = new S(v.at(i).at(0), v.at(i).at(1))
+ *             sv.push_back(s[0])
+ */
+  __pyx_t_2 = __pyx_v_n;
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_i = __pyx_t_4;
+
+    /* "atcoder.pyx":133
+ *         cdef S *s
+ *         for i in range(n):
+ *             s = new S(v.at(i).at(0), v.at(i).at(1))             # <<<<<<<<<<<<<<
+ *             sv.push_back(s[0])
+ *         self._thisptr = new lazy_segtree(sv[0])
+ */
+    try {
+      __pyx_t_5 = __pyx_v_v.at(__pyx_v_i);
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(0, 133, __pyx_L1_error)
+    }
+    try {
+      __pyx_t_6 = __pyx_t_5->at(0);
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(0, 133, __pyx_L1_error)
+    }
+    try {
+      __pyx_t_7 = __pyx_v_v.at(__pyx_v_i);
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(0, 133, __pyx_L1_error)
+    }
+    try {
+      __pyx_t_8 = __pyx_t_7->at(1);
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(0, 133, __pyx_L1_error)
+    }
+    __pyx_v_s = new aclython::S(__pyx_t_6, __pyx_t_8);
+
+    /* "atcoder.pyx":134
+ *         for i in range(n):
+ *             s = new S(v.at(i).at(0), v.at(i).at(1))
+ *             sv.push_back(s[0])             # <<<<<<<<<<<<<<
+ *         self._thisptr = new lazy_segtree(sv[0])
+ *     cpdef void set(self, int p, vector[int] v):
+ */
+    try {
+      __pyx_v_sv->push_back((__pyx_v_s[0]));
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(0, 134, __pyx_L1_error)
+    }
+  }
+
+  /* "atcoder.pyx":135
+ *             s = new S(v.at(i).at(0), v.at(i).at(1))
+ *             sv.push_back(s[0])
+ *         self._thisptr = new lazy_segtree(sv[0])             # <<<<<<<<<<<<<<
+ *     cpdef void set(self, int p, vector[int] v):
+ *         cdef S *s = new S(v.at(0), v.at(1))
+ */
+  __pyx_v_self->_thisptr = new aclython::lazy_segtree((__pyx_v_sv[0]));
+
+  /* "atcoder.pyx":128
+ * cdef class LazySegTree:
+ *     cdef lazy_segtree *_thisptr
+ *     def __cinit__(self, vector[vector[int]] v):             # <<<<<<<<<<<<<<
+ *         cdef int n = v.size()
+ *         cdef vector[S] *sv = new vector[S]()
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":136
+ *             sv.push_back(s[0])
+ *         self._thisptr = new lazy_segtree(sv[0])
+ *     cpdef void set(self, int p, vector[int] v):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(v.at(0), v.at(1))
+ *         self._thisptr.set(p, s[0])
+ */
+
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_3set(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static void __pyx_f_7atcoder_11LazySegTree_set(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v, int __pyx_skip_dispatch) {
+  aclython::S *__pyx_v_s;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  __Pyx_FakeReference<int> __pyx_t_9;
+  __Pyx_FakeReference<int> __pyx_t_10;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("set", 0);
+  /* Check if called by wrapper */
+  if (unlikely(__pyx_skip_dispatch)) ;
+  /* Check if overridden in Python */
+  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
+    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
+      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      #endif
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7atcoder_11LazySegTree_3set)) {
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = __pyx_convert_vector_to_py_int(__pyx_v_v); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_t_5 = __pyx_t_1; __pyx_t_6 = NULL;
+        __pyx_t_7 = 0;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+          __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+          if (likely(__pyx_t_6)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+            __Pyx_INCREF(__pyx_t_6);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_5, function);
+            __pyx_t_7 = 1;
+          }
+        }
+        #if CYTHON_FAST_PYCALL
+        if (PyFunction_Check(__pyx_t_5)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_4};
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        #if CYTHON_FAST_PYCCALL
+        if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_4};
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        {
+          __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 136, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          if (__pyx_t_6) {
+            __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
+          }
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_7, __pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_4);
+          PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_4);
+          __pyx_t_3 = 0;
+          __pyx_t_4 = 0;
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        }
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L0;
+      }
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
+      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
+        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+      }
+      #endif
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    }
+    #endif
+  }
+
+  /* "atcoder.pyx":137
+ *         self._thisptr = new lazy_segtree(sv[0])
+ *     cpdef void set(self, int p, vector[int] v):
+ *         cdef S *s = new S(v.at(0), v.at(1))             # <<<<<<<<<<<<<<
+ *         self._thisptr.set(p, s[0])
+ *     cpdef vector[int] get(self, int p):
+ */
+  try {
+    __pyx_t_9 = __pyx_v_v.at(0);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 137, __pyx_L1_error)
+  }
+  try {
+    __pyx_t_10 = __pyx_v_v.at(1);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 137, __pyx_L1_error)
+  }
+  __pyx_v_s = new aclython::S(__pyx_t_9, __pyx_t_10);
+
+  /* "atcoder.pyx":138
+ *     cpdef void set(self, int p, vector[int] v):
+ *         cdef S *s = new S(v.at(0), v.at(1))
+ *         self._thisptr.set(p, s[0])             # <<<<<<<<<<<<<<
+ *     cpdef vector[int] get(self, int p):
+ *         cdef S *s = new S(self._thisptr.get(p))
+ */
+  __pyx_v_self->_thisptr->set(__pyx_v_p, (__pyx_v_s[0]));
+
+  /* "atcoder.pyx":136
+ *             sv.push_back(s[0])
+ *         self._thisptr = new lazy_segtree(sv[0])
+ *     cpdef void set(self, int p, vector[int] v):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(v.at(0), v.at(1))
+ *         self._thisptr.set(p, s[0])
+ */
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_WriteUnraisable("atcoder.LazySegTree.set", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_3set(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_3set(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_p;
+  std::vector<int>  __pyx_v_v;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("set (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_p,&__pyx_n_s_v,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_p)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, 1); __PYX_ERR(0, 136, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set") < 0)) __PYX_ERR(0, 136, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_p = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_p == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
+    __pyx_v_v = __pyx_convert_vector_from_py_int(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("set", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 136, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.set", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_2set(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), __pyx_v_p, __pyx_v_v);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_2set(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("set", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_7atcoder_11LazySegTree_set(__pyx_v_self, __pyx_v_p, __pyx_v_v, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.set", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":139
+ *         cdef S *s = new S(v.at(0), v.at(1))
+ *         self._thisptr.set(p, s[0])
+ *     cpdef vector[int] get(self, int p):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(self._thisptr.get(p))
+ *         cdef vector[int] *v = new vector[int]()
+ */
+
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_5get(PyObject *__pyx_v_self, PyObject *__pyx_arg_p); /*proto*/
+static std::vector<int>  __pyx_f_7atcoder_11LazySegTree_get(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, int __pyx_skip_dispatch) {
+  aclython::S *__pyx_v_s;
+  std::vector<int>  *__pyx_v_v;
+  std::vector<int>  __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  std::vector<int>  __pyx_t_6;
+  std::vector<int>  *__pyx_t_7;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get", 0);
+  /* Check if called by wrapper */
+  if (unlikely(__pyx_skip_dispatch)) ;
+  /* Check if overridden in Python */
+  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
+    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
+      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      #endif
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7atcoder_11LazySegTree_5get)) {
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
+          __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+          if (likely(__pyx_t_5)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+            __Pyx_INCREF(__pyx_t_5);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_4, function);
+          }
+        }
+        __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3);
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_t_6 = __pyx_convert_vector_from_py_int(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_r = __pyx_t_6;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L0;
+      }
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
+      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
+        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+      }
+      #endif
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    }
+    #endif
+  }
+
+  /* "atcoder.pyx":140
+ *         self._thisptr.set(p, s[0])
+ *     cpdef vector[int] get(self, int p):
+ *         cdef S *s = new S(self._thisptr.get(p))             # <<<<<<<<<<<<<<
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())
+ */
+  __pyx_v_s = new aclython::S(__pyx_v_self->_thisptr->get(__pyx_v_p));
+
+  /* "atcoder.pyx":141
+ *     cpdef vector[int] get(self, int p):
+ *         cdef S *s = new S(self._thisptr.get(p))
+ *         cdef vector[int] *v = new vector[int]()             # <<<<<<<<<<<<<<
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)
+ */
+  try {
+    __pyx_t_7 = new std::vector<int> ();
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 141, __pyx_L1_error)
+  }
+  __pyx_v_v = __pyx_t_7;
+
+  /* "atcoder.pyx":142
+ *         cdef S *s = new S(self._thisptr.get(p))
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())             # <<<<<<<<<<<<<<
+ *         v.push_back(s.size)
+ *         return v[0]
+ */
+  try {
+    __pyx_v_v->push_back(__pyx_v_s->get_a());
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 142, __pyx_L1_error)
+  }
+
+  /* "atcoder.pyx":143
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)             # <<<<<<<<<<<<<<
+ *         return v[0]
+ *     cpdef vector[int] prod(self, int l, int r):
+ */
+  try {
+    __pyx_v_v->push_back(__pyx_v_s->size);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 143, __pyx_L1_error)
+  }
+
+  /* "atcoder.pyx":144
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)
+ *         return v[0]             # <<<<<<<<<<<<<<
+ *     cpdef vector[int] prod(self, int l, int r):
+ *         cdef S *s = new S(self._thisptr.prod(l, r))
+ */
+  __pyx_r = (__pyx_v_v[0]);
+  goto __pyx_L0;
+
+  /* "atcoder.pyx":139
+ *         cdef S *s = new S(v.at(0), v.at(1))
+ *         self._thisptr.set(p, s[0])
+ *     cpdef vector[int] get(self, int p):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(self._thisptr.get(p))
+ *         cdef vector[int] *v = new vector[int]()
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_WriteUnraisable("atcoder.LazySegTree.get", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_5get(PyObject *__pyx_v_self, PyObject *__pyx_arg_p); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_5get(PyObject *__pyx_v_self, PyObject *__pyx_arg_p) {
+  int __pyx_v_p;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get (wrapper)", 0);
+  assert(__pyx_arg_p); {
+    __pyx_v_p = __Pyx_PyInt_As_int(__pyx_arg_p); if (unlikely((__pyx_v_p == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.get", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_4get(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), ((int)__pyx_v_p));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_4get(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_convert_vector_to_py_int(__pyx_f_7atcoder_11LazySegTree_get(__pyx_v_self, __pyx_v_p, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.get", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":145
+ *         v.push_back(s.size)
+ *         return v[0]
+ *     cpdef vector[int] prod(self, int l, int r):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(self._thisptr.prod(l, r))
+ *         cdef vector[int] *v = new vector[int]()
+ */
+
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_7prod(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static std::vector<int>  __pyx_f_7atcoder_11LazySegTree_prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r, int __pyx_skip_dispatch) {
+  aclython::S *__pyx_v_s;
+  std::vector<int>  *__pyx_v_v;
+  std::vector<int>  __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  std::vector<int>  __pyx_t_9;
+  std::vector<int>  *__pyx_t_10;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("prod", 0);
+  /* Check if called by wrapper */
+  if (unlikely(__pyx_skip_dispatch)) ;
+  /* Check if overridden in Python */
+  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
+    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
+      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      #endif
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_prod); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7atcoder_11LazySegTree_7prod)) {
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_r); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_t_5 = __pyx_t_1; __pyx_t_6 = NULL;
+        __pyx_t_7 = 0;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+          __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+          if (likely(__pyx_t_6)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+            __Pyx_INCREF(__pyx_t_6);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_5, function);
+            __pyx_t_7 = 1;
+          }
+        }
+        #if CYTHON_FAST_PYCALL
+        if (PyFunction_Check(__pyx_t_5)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_4};
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        #if CYTHON_FAST_PYCCALL
+        if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_4};
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        {
+          __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 145, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          if (__pyx_t_6) {
+            __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
+          }
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_7, __pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_4);
+          PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_4);
+          __pyx_t_3 = 0;
+          __pyx_t_4 = 0;
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        }
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __pyx_t_9 = __pyx_convert_vector_from_py_int(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_r = __pyx_t_9;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L0;
+      }
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
+      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
+        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+      }
+      #endif
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    }
+    #endif
+  }
+
+  /* "atcoder.pyx":146
+ *         return v[0]
+ *     cpdef vector[int] prod(self, int l, int r):
+ *         cdef S *s = new S(self._thisptr.prod(l, r))             # <<<<<<<<<<<<<<
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())
+ */
+  __pyx_v_s = new aclython::S(__pyx_v_self->_thisptr->prod(__pyx_v_l, __pyx_v_r));
+
+  /* "atcoder.pyx":147
+ *     cpdef vector[int] prod(self, int l, int r):
+ *         cdef S *s = new S(self._thisptr.prod(l, r))
+ *         cdef vector[int] *v = new vector[int]()             # <<<<<<<<<<<<<<
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)
+ */
+  try {
+    __pyx_t_10 = new std::vector<int> ();
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 147, __pyx_L1_error)
+  }
+  __pyx_v_v = __pyx_t_10;
+
+  /* "atcoder.pyx":148
+ *         cdef S *s = new S(self._thisptr.prod(l, r))
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())             # <<<<<<<<<<<<<<
+ *         v.push_back(s.size)
+ *         return v[0]
+ */
+  try {
+    __pyx_v_v->push_back(__pyx_v_s->get_a());
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 148, __pyx_L1_error)
+  }
+
+  /* "atcoder.pyx":149
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)             # <<<<<<<<<<<<<<
+ *         return v[0]
+ *     cpdef vector[int] all_prod(self):
+ */
+  try {
+    __pyx_v_v->push_back(__pyx_v_s->size);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 149, __pyx_L1_error)
+  }
+
+  /* "atcoder.pyx":150
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)
+ *         return v[0]             # <<<<<<<<<<<<<<
+ *     cpdef vector[int] all_prod(self):
+ *         cdef S *s = new S(self._thisptr.all_prod())
+ */
+  __pyx_r = (__pyx_v_v[0]);
+  goto __pyx_L0;
+
+  /* "atcoder.pyx":145
+ *         v.push_back(s.size)
+ *         return v[0]
+ *     cpdef vector[int] prod(self, int l, int r):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(self._thisptr.prod(l, r))
+ *         cdef vector[int] *v = new vector[int]()
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_WriteUnraisable("atcoder.LazySegTree.prod", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_7prod(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_7prod(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_l;
+  int __pyx_v_r;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("prod (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_l,&__pyx_n_s_r,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_l)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("prod", 1, 2, 2, 1); __PYX_ERR(0, 145, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "prod") < 0)) __PYX_ERR(0, 145, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_l = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_l == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L3_error)
+    __pyx_v_r = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_r == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("prod", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 145, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.prod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_6prod(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), __pyx_v_l, __pyx_v_r);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_6prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("prod", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_convert_vector_to_py_int(__pyx_f_7atcoder_11LazySegTree_prod(__pyx_v_self, __pyx_v_l, __pyx_v_r, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.prod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":151
+ *         v.push_back(s.size)
+ *         return v[0]
+ *     cpdef vector[int] all_prod(self):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(self._thisptr.all_prod())
+ *         cdef vector[int] *v = new vector[int]()
+ */
+
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_9all_prod(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static std::vector<int>  __pyx_f_7atcoder_11LazySegTree_all_prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_skip_dispatch) {
+  aclython::S *__pyx_v_s;
+  std::vector<int>  *__pyx_v_v;
+  std::vector<int>  __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  std::vector<int>  __pyx_t_5;
+  std::vector<int>  *__pyx_t_6;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("all_prod", 0);
+  /* Check if called by wrapper */
+  if (unlikely(__pyx_skip_dispatch)) ;
+  /* Check if overridden in Python */
+  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
+    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
+      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      #endif
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_all_prod); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7atcoder_11LazySegTree_9all_prod)) {
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_t_3 = __pyx_t_1; __pyx_t_4 = NULL;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+          __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+          if (likely(__pyx_t_4)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+            __Pyx_INCREF(__pyx_t_4);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_3, function);
+          }
+        }
+        __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_5 = __pyx_convert_vector_from_py_int(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 151, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_r = __pyx_t_5;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L0;
+      }
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
+      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
+        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+      }
+      #endif
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    }
+    #endif
+  }
+
+  /* "atcoder.pyx":152
+ *         return v[0]
+ *     cpdef vector[int] all_prod(self):
+ *         cdef S *s = new S(self._thisptr.all_prod())             # <<<<<<<<<<<<<<
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())
+ */
+  __pyx_v_s = new aclython::S(__pyx_v_self->_thisptr->all_prod());
+
+  /* "atcoder.pyx":153
+ *     cpdef vector[int] all_prod(self):
+ *         cdef S *s = new S(self._thisptr.all_prod())
+ *         cdef vector[int] *v = new vector[int]()             # <<<<<<<<<<<<<<
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)
+ */
+  try {
+    __pyx_t_6 = new std::vector<int> ();
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 153, __pyx_L1_error)
+  }
+  __pyx_v_v = __pyx_t_6;
+
+  /* "atcoder.pyx":154
+ *         cdef S *s = new S(self._thisptr.all_prod())
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())             # <<<<<<<<<<<<<<
+ *         v.push_back(s.size)
+ *         return v[0]
+ */
+  try {
+    __pyx_v_v->push_back(__pyx_v_s->get_a());
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 154, __pyx_L1_error)
+  }
+
+  /* "atcoder.pyx":155
+ *         cdef vector[int] *v = new vector[int]()
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)             # <<<<<<<<<<<<<<
+ *         return v[0]
+ *     cpdef void apply(self, int p, vector[int] v):
+ */
+  try {
+    __pyx_v_v->push_back(__pyx_v_s->size);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 155, __pyx_L1_error)
+  }
+
+  /* "atcoder.pyx":156
+ *         v.push_back(s.get_a())
+ *         v.push_back(s.size)
+ *         return v[0]             # <<<<<<<<<<<<<<
+ *     cpdef void apply(self, int p, vector[int] v):
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ */
+  __pyx_r = (__pyx_v_v[0]);
+  goto __pyx_L0;
+
+  /* "atcoder.pyx":151
+ *         v.push_back(s.size)
+ *         return v[0]
+ *     cpdef vector[int] all_prod(self):             # <<<<<<<<<<<<<<
+ *         cdef S *s = new S(self._thisptr.all_prod())
+ *         cdef vector[int] *v = new vector[int]()
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_WriteUnraisable("atcoder.LazySegTree.all_prod", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_9all_prod(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_9all_prod(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("all_prod (wrapper)", 0);
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_8all_prod(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_8all_prod(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("all_prod", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_convert_vector_to_py_int(__pyx_f_7atcoder_11LazySegTree_all_prod(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.all_prod", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":157
+ *         v.push_back(s.size)
+ *         return v[0]
+ *     cpdef void apply(self, int p, vector[int] v):             # <<<<<<<<<<<<<<
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(p, f[0])
+ */
+
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_11apply(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static void __pyx_f_7atcoder_11LazySegTree_apply(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v, int __pyx_skip_dispatch) {
+  aclython::F *__pyx_v_f;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  __Pyx_FakeReference<int> __pyx_t_9;
+  __Pyx_FakeReference<int> __pyx_t_10;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("apply", 0);
+  /* Check if called by wrapper */
+  if (unlikely(__pyx_skip_dispatch)) ;
+  /* Check if overridden in Python */
+  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
+    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
+      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      #endif
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_apply); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7atcoder_11LazySegTree_11apply)) {
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = __pyx_convert_vector_to_py_int(__pyx_v_v); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_t_5 = __pyx_t_1; __pyx_t_6 = NULL;
+        __pyx_t_7 = 0;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+          __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_5);
+          if (likely(__pyx_t_6)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+            __Pyx_INCREF(__pyx_t_6);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_5, function);
+            __pyx_t_7 = 1;
+          }
+        }
+        #if CYTHON_FAST_PYCALL
+        if (PyFunction_Check(__pyx_t_5)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_4};
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        #if CYTHON_FAST_PYCCALL
+        if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_3, __pyx_t_4};
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        {
+          __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 157, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          if (__pyx_t_6) {
+            __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
+          }
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_7, __pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_4);
+          PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_4);
+          __pyx_t_3 = 0;
+          __pyx_t_4 = 0;
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+        }
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L0;
+      }
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
+      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
+        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+      }
+      #endif
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    }
+    #endif
+  }
+
+  /* "atcoder.pyx":158
+ *         return v[0]
+ *     cpdef void apply(self, int p, vector[int] v):
+ *         cdef F *f = new F(v.at(0), v.at(1))             # <<<<<<<<<<<<<<
+ *         self._thisptr.apply(p, f[0])
+ *     cpdef void apply_range(self, int l, int r, vector[int] v):
+ */
+  try {
+    __pyx_t_9 = __pyx_v_v.at(0);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 158, __pyx_L1_error)
+  }
+  try {
+    __pyx_t_10 = __pyx_v_v.at(1);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 158, __pyx_L1_error)
+  }
+  __pyx_v_f = new aclython::F(__pyx_t_9, __pyx_t_10);
+
+  /* "atcoder.pyx":159
+ *     cpdef void apply(self, int p, vector[int] v):
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(p, f[0])             # <<<<<<<<<<<<<<
+ *     cpdef void apply_range(self, int l, int r, vector[int] v):
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ */
+  __pyx_v_self->_thisptr->apply(__pyx_v_p, (__pyx_v_f[0]));
+
+  /* "atcoder.pyx":157
+ *         v.push_back(s.size)
+ *         return v[0]
+ *     cpdef void apply(self, int p, vector[int] v):             # <<<<<<<<<<<<<<
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(p, f[0])
+ */
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_WriteUnraisable("atcoder.LazySegTree.apply", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_11apply(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_11apply(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_p;
+  std::vector<int>  __pyx_v_v;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("apply (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_p,&__pyx_n_s_v,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_p)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("apply", 1, 2, 2, 1); __PYX_ERR(0, 157, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "apply") < 0)) __PYX_ERR(0, 157, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_p = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_p == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L3_error)
+    __pyx_v_v = __pyx_convert_vector_from_py_int(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("apply", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 157, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.apply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_10apply(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), __pyx_v_p, __pyx_v_v);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_10apply(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_p, std::vector<int>  __pyx_v_v) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("apply", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_7atcoder_11LazySegTree_apply(__pyx_v_self, __pyx_v_p, __pyx_v_v, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.apply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "atcoder.pyx":160
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(p, f[0])
+ *     cpdef void apply_range(self, int l, int r, vector[int] v):             # <<<<<<<<<<<<<<
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(l, r, f[0])
+ */
+
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_13apply_range(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static void __pyx_f_7atcoder_11LazySegTree_apply_range(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r, std::vector<int>  __pyx_v_v, int __pyx_skip_dispatch) {
+  aclython::F *__pyx_v_f;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
+  __Pyx_FakeReference<int> __pyx_t_10;
+  __Pyx_FakeReference<int> __pyx_t_11;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("apply_range", 0);
+  /* Check if called by wrapper */
+  if (unlikely(__pyx_skip_dispatch)) ;
+  /* Check if overridden in Python */
+  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
+    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
+      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      #endif
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_apply_range); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7atcoder_11LazySegTree_13apply_range)) {
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_r); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 160, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_5 = __pyx_convert_vector_to_py_int(__pyx_v_v); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+        __Pyx_INCREF(__pyx_t_1);
+        __pyx_t_6 = __pyx_t_1; __pyx_t_7 = NULL;
+        __pyx_t_8 = 0;
+        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+          __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
+          if (likely(__pyx_t_7)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+            __Pyx_INCREF(__pyx_t_7);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_6, function);
+            __pyx_t_8 = 1;
+          }
+        }
+        #if CYTHON_FAST_PYCALL
+        if (PyFunction_Check(__pyx_t_6)) {
+          PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_3, __pyx_t_4, __pyx_t_5};
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        } else
+        #endif
+        #if CYTHON_FAST_PYCCALL
+        if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
+          PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_3, __pyx_t_4, __pyx_t_5};
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        } else
+        #endif
+        {
+          __pyx_t_9 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 160, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_9);
+          if (__pyx_t_7) {
+            __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
+          }
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_9, 0+__pyx_t_8, __pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_4);
+          PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_t_4);
+          __Pyx_GIVEREF(__pyx_t_5);
+          PyTuple_SET_ITEM(__pyx_t_9, 2+__pyx_t_8, __pyx_t_5);
+          __pyx_t_3 = 0;
+          __pyx_t_4 = 0;
+          __pyx_t_5 = 0;
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        }
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        goto __pyx_L0;
+      }
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
+      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
+      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
+        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
+      }
+      #endif
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
+    }
+    #endif
+  }
+
+  /* "atcoder.pyx":161
+ *         self._thisptr.apply(p, f[0])
+ *     cpdef void apply_range(self, int l, int r, vector[int] v):
+ *         cdef F *f = new F(v.at(0), v.at(1))             # <<<<<<<<<<<<<<
+ *         self._thisptr.apply(l, r, f[0])
+ */
+  try {
+    __pyx_t_10 = __pyx_v_v.at(0);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 161, __pyx_L1_error)
+  }
+  try {
+    __pyx_t_11 = __pyx_v_v.at(1);
+  } catch(...) {
+    __Pyx_CppExn2PyErr();
+    __PYX_ERR(0, 161, __pyx_L1_error)
+  }
+  __pyx_v_f = new aclython::F(__pyx_t_10, __pyx_t_11);
+
+  /* "atcoder.pyx":162
+ *     cpdef void apply_range(self, int l, int r, vector[int] v):
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(l, r, f[0])             # <<<<<<<<<<<<<<
+ */
+  __pyx_v_self->_thisptr->apply(__pyx_v_l, __pyx_v_r, (__pyx_v_f[0]));
+
+  /* "atcoder.pyx":160
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(p, f[0])
+ *     cpdef void apply_range(self, int l, int r, vector[int] v):             # <<<<<<<<<<<<<<
+ *         cdef F *f = new F(v.at(0), v.at(1))
+ *         self._thisptr.apply(l, r, f[0])
+ */
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_WriteUnraisable("atcoder.LazySegTree.apply_range", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_13apply_range(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_13apply_range(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_v_l;
+  int __pyx_v_r;
+  std::vector<int>  __pyx_v_v;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("apply_range (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_l,&__pyx_n_s_r,&__pyx_n_s_v,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_l)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_r)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("apply_range", 1, 3, 3, 1); __PYX_ERR(0, 160, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("apply_range", 1, 3, 3, 2); __PYX_ERR(0, 160, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "apply_range") < 0)) __PYX_ERR(0, 160, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_l = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_l == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
+    __pyx_v_r = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_r == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
+    __pyx_v_v = __pyx_convert_vector_from_py_int(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("apply_range", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 160, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("atcoder.LazySegTree.apply_range", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_12apply_range(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), __pyx_v_l, __pyx_v_r, __pyx_v_v);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_12apply_range(struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, int __pyx_v_l, int __pyx_v_r, std::vector<int>  __pyx_v_v) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("apply_range", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_void_to_None(__pyx_f_7atcoder_11LazySegTree_apply_range(__pyx_v_self, __pyx_v_l, __pyx_v_r, __pyx_v_v, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.apply_range", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_15__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_15__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_14__reduce_cython__(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_14__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__reduce_cython__", 0);
+
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(1, 2, __pyx_L1_error)
+
+  /* "(tree fragment)":1
+ * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_17__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_7atcoder_11LazySegTree_17__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_7atcoder_11LazySegTree_16__setstate_cython__(((struct __pyx_obj_7atcoder_LazySegTree *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7atcoder_11LazySegTree_16__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7atcoder_LazySegTree *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__setstate_cython__", 0);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __PYX_ERR(1, 4, __pyx_L1_error)
+
+  /* "(tree fragment)":3
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("atcoder.LazySegTree.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -5361,6 +7194,120 @@ static std::vector<int>  __pyx_convert_vector_from_py_int(PyObject *__pyx_v_o) {
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("vector.from_py.__pyx_convert_vector_from_py_int", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_item);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static std::vector<std::vector<int> >  __pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___(PyObject *__pyx_v_o) {
+  std::vector<std::vector<int> >  __pyx_v_v;
+  PyObject *__pyx_v_item = NULL;
+  std::vector<std::vector<int> >  __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *(*__pyx_t_3)(PyObject *);
+  PyObject *__pyx_t_4 = NULL;
+  std::vector<int>  __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___", 0);
+
+  /* "vector.from_py":47
+ * cdef vector[X] __pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___(object o) except *:
+ *     cdef vector[X] v
+ *     for item in o:             # <<<<<<<<<<<<<<
+ *         v.push_back(<X>item)
+ *     return v
+ */
+  if (likely(PyList_CheckExact(__pyx_v_o)) || PyTuple_CheckExact(__pyx_v_o)) {
+    __pyx_t_1 = __pyx_v_o; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+    __pyx_t_3 = NULL;
+  } else {
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_o); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 47, __pyx_L1_error)
+  }
+  for (;;) {
+    if (likely(!__pyx_t_3)) {
+      if (likely(PyList_CheckExact(__pyx_t_1))) {
+        if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 47, __pyx_L1_error)
+        #else
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 47, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        #endif
+      } else {
+        if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 47, __pyx_L1_error)
+        #else
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 47, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        #endif
+      }
+    } else {
+      __pyx_t_4 = __pyx_t_3(__pyx_t_1);
+      if (unlikely(!__pyx_t_4)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(1, 47, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_4);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_4);
+    __pyx_t_4 = 0;
+
+    /* "vector.from_py":48
+ *     cdef vector[X] v
+ *     for item in o:
+ *         v.push_back(<X>item)             # <<<<<<<<<<<<<<
+ *     return v
+ * 
+ */
+    __pyx_t_5 = __pyx_convert_vector_from_py_int(__pyx_v_item); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 48, __pyx_L1_error)
+    __pyx_v_v.push_back(((std::vector<int> )__pyx_t_5));
+
+    /* "vector.from_py":47
+ * cdef vector[X] __pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___(object o) except *:
+ *     cdef vector[X] v
+ *     for item in o:             # <<<<<<<<<<<<<<
+ *         v.push_back(<X>item)
+ *     return v
+ */
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "vector.from_py":49
+ *     for item in o:
+ *         v.push_back(<X>item)
+ *     return v             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_r = __pyx_v_v;
+  goto __pyx_L0;
+
+  /* "vector.from_py":45
+ * 
+ * @cname("__pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___")
+ * cdef vector[X] __pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___(object o) except *:             # <<<<<<<<<<<<<<
+ *     cdef vector[X] v
+ *     for item in o:
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("vector.from_py.__pyx_convert_vector_from_py_std_3a__3a_vector_3c_int_3e___", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_pretend_to_initialize(&__pyx_r);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_item);
@@ -5964,6 +7911,115 @@ static PyTypeObject __pyx_type_7atcoder_SegTreeMax = {
   0, /*tp_print*/
   #endif
 };
+static struct __pyx_vtabstruct_7atcoder_LazySegTree __pyx_vtable_7atcoder_LazySegTree;
+
+static PyObject *__pyx_tp_new_7atcoder_LazySegTree(PyTypeObject *t, PyObject *a, PyObject *k) {
+  struct __pyx_obj_7atcoder_LazySegTree *p;
+  PyObject *o;
+  if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
+    o = (*t->tp_alloc)(t, 0);
+  } else {
+    o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
+  }
+  if (unlikely(!o)) return 0;
+  p = ((struct __pyx_obj_7atcoder_LazySegTree *)o);
+  p->__pyx_vtab = __pyx_vtabptr_7atcoder_LazySegTree;
+  if (unlikely(__pyx_pw_7atcoder_11LazySegTree_1__cinit__(o, a, k) < 0)) goto bad;
+  return o;
+  bad:
+  Py_DECREF(o); o = 0;
+  return NULL;
+}
+
+static void __pyx_tp_dealloc_7atcoder_LazySegTree(PyObject *o) {
+  #if CYTHON_USE_TP_FINALIZE
+  if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
+    if (PyObject_CallFinalizerFromDealloc(o)) return;
+  }
+  #endif
+  (*Py_TYPE(o)->tp_free)(o);
+}
+
+static PyMethodDef __pyx_methods_7atcoder_LazySegTree[] = {
+  {"set", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7atcoder_11LazySegTree_3set, METH_VARARGS|METH_KEYWORDS, 0},
+  {"get", (PyCFunction)__pyx_pw_7atcoder_11LazySegTree_5get, METH_O, 0},
+  {"prod", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7atcoder_11LazySegTree_7prod, METH_VARARGS|METH_KEYWORDS, 0},
+  {"all_prod", (PyCFunction)__pyx_pw_7atcoder_11LazySegTree_9all_prod, METH_NOARGS, 0},
+  {"apply", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7atcoder_11LazySegTree_11apply, METH_VARARGS|METH_KEYWORDS, 0},
+  {"apply_range", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7atcoder_11LazySegTree_13apply_range, METH_VARARGS|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_7atcoder_11LazySegTree_15__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_7atcoder_11LazySegTree_17__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_7atcoder_LazySegTree = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "atcoder.LazySegTree", /*tp_name*/
+  sizeof(struct __pyx_obj_7atcoder_LazySegTree), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_7atcoder_LazySegTree, /*tp_dealloc*/
+  #if PY_VERSION_HEX < 0x030800b4
+  0, /*tp_print*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4
+  0, /*tp_vectorcall_offset*/
+  #endif
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
+  0, /*tp_doc*/
+  0, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_7atcoder_LazySegTree, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_7atcoder_LazySegTree, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b1
+  0, /*tp_vectorcall*/
+  #endif
+  #if PY_VERSION_HEX >= 0x030800b4 && PY_VERSION_HEX < 0x03090000
+  0, /*tp_print*/
+  #endif
+};
 
 static PyMethodDef __pyx_methods[] = {
   {"ReadInt", (PyCFunction)__pyx_pw_7atcoder_1ReadInt, METH_O, 0},
@@ -6015,11 +8071,14 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_LazySegTree, __pyx_k_LazySegTree, sizeof(__pyx_k_LazySegTree), 0, 0, 1, 1},
   {&__pyx_n_s_SegTree, __pyx_k_SegTree, sizeof(__pyx_k_SegTree), 0, 0, 1, 1},
   {&__pyx_n_s_SegTreeMax, __pyx_k_SegTreeMax, sizeof(__pyx_k_SegTreeMax), 0, 0, 1, 1},
   {&__pyx_n_s_SegTreeMin, __pyx_k_SegTreeMin, sizeof(__pyx_k_SegTreeMin), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_all_prod, __pyx_k_all_prod, sizeof(__pyx_k_all_prod), 0, 0, 1, 1},
+  {&__pyx_n_s_apply, __pyx_k_apply, sizeof(__pyx_k_apply), 0, 0, 1, 1},
+  {&__pyx_n_s_apply_range, __pyx_k_apply_range, sizeof(__pyx_k_apply_range), 0, 0, 1, 1},
   {&__pyx_n_s_atcoder, __pyx_k_atcoder, sizeof(__pyx_k_atcoder), 0, 0, 1, 1},
   {&__pyx_kp_s_atcoder_pyx, __pyx_k_atcoder_pyx, sizeof(__pyx_k_atcoder_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
@@ -6101,6 +8160,25 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
+  /* "(tree fragment)":2
+ * def __reduce_cython__(self):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ */
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
+
+  /* "(tree fragment)":4
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
+ * def __setstate_cython__(self, __pyx_state):
+ *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
+ */
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+
   /* "atcoder.pyx":97
  * 
  * 
@@ -6108,10 +8186,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     if op=="min":
  *         return SegTreeMin(v)
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_s_v, __pyx_n_s_op); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 97, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atcoder_pyx, __pyx_n_s_SegTree, 97, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_v, __pyx_n_s_op); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_atcoder_pyx, __pyx_n_s_SegTree, 97, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6201,6 +8279,24 @@ static int __Pyx_modinit_type_init_code(void) {
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_SegTreeMax, (PyObject *)&__pyx_type_7atcoder_SegTreeMax) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7atcoder_SegTreeMax) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   __pyx_ptype_7atcoder_SegTreeMax = &__pyx_type_7atcoder_SegTreeMax;
+  __pyx_vtabptr_7atcoder_LazySegTree = &__pyx_vtable_7atcoder_LazySegTree;
+  __pyx_vtable_7atcoder_LazySegTree.set = (void (*)(struct __pyx_obj_7atcoder_LazySegTree *, int, std::vector<int> , int __pyx_skip_dispatch))__pyx_f_7atcoder_11LazySegTree_set;
+  __pyx_vtable_7atcoder_LazySegTree.get = (std::vector<int>  (*)(struct __pyx_obj_7atcoder_LazySegTree *, int, int __pyx_skip_dispatch))__pyx_f_7atcoder_11LazySegTree_get;
+  __pyx_vtable_7atcoder_LazySegTree.prod = (std::vector<int>  (*)(struct __pyx_obj_7atcoder_LazySegTree *, int, int, int __pyx_skip_dispatch))__pyx_f_7atcoder_11LazySegTree_prod;
+  __pyx_vtable_7atcoder_LazySegTree.all_prod = (std::vector<int>  (*)(struct __pyx_obj_7atcoder_LazySegTree *, int __pyx_skip_dispatch))__pyx_f_7atcoder_11LazySegTree_all_prod;
+  __pyx_vtable_7atcoder_LazySegTree.apply = (void (*)(struct __pyx_obj_7atcoder_LazySegTree *, int, std::vector<int> , int __pyx_skip_dispatch))__pyx_f_7atcoder_11LazySegTree_apply;
+  __pyx_vtable_7atcoder_LazySegTree.apply_range = (void (*)(struct __pyx_obj_7atcoder_LazySegTree *, int, int, std::vector<int> , int __pyx_skip_dispatch))__pyx_f_7atcoder_11LazySegTree_apply_range;
+  if (PyType_Ready(&__pyx_type_7atcoder_LazySegTree) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  #if PY_VERSION_HEX < 0x030800B1
+  __pyx_type_7atcoder_LazySegTree.tp_print = 0;
+  #endif
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7atcoder_LazySegTree.tp_dictoffset && __pyx_type_7atcoder_LazySegTree.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_7atcoder_LazySegTree.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  }
+  if (__Pyx_SetVtable(__pyx_type_7atcoder_LazySegTree.tp_dict, __pyx_vtabptr_7atcoder_LazySegTree) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_LazySegTree, (PyObject *)&__pyx_type_7atcoder_LazySegTree) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7atcoder_LazySegTree) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_ptype_7atcoder_LazySegTree = &__pyx_type_7atcoder_LazySegTree;
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;

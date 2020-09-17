@@ -1,8 +1,9 @@
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
+#include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
+#include "/opt/atcoder-stl/atcoder/modint.hpp"
 #include <vector>
 #include <algorithm>
 #include <cassert>
-#include <vector>
 
 namespace aclython {
 
@@ -11,7 +12,7 @@ template <class S, S (*op)(S, S), S (*e)()> struct segtree {
     segtree() : segtree(0) {}
     segtree(int n) : segtree(std::vector<S>(n, e())) {}
     segtree(const std::vector<S>& v) : _n(int(v.size())) {
-        log = internal::ceil_pow2(_n);
+        log = atcoder::internal::ceil_pow2(_n);
         size = 1 << log;
         d = std::vector<S>(2 * size, e());
         for (int i = 0; i < _n; i++) d[size + i] = v[i];
@@ -164,5 +165,48 @@ struct segtree_max {
         segtree<int, max_op, max_e> seg;
 };
 
+using mint = atcoder::modint998244353;
+
+struct S {
+    mint a;
+    int size;
+    S(mint _a, int _size) : a(_a) ,size(_size) {}
+    S(int _a, int _size) : a(_a) ,size(_size) {}
+    S(const S &s) : a(s.a), size(s.size) {}
+    int get_a() { return (int)a.val(); }
+};
+
+struct F {
+    mint a, b;
+    F(mint _a, mint _b) : a(_a), b(_b) {}
+    F(int _a, int _b) : a(_a), b(_b) {}
+    F(const F &f) : a(f.a), b(f.b) {}
+    int get_a() { return (int)a.val(); }
+    int get_b() { return (int)b.val(); }
+};
+
+S op(S l, S r) { return S{l.a + r.a, l.size + r.size}; }
+
+S e() { return S{0, 0}; }
+
+S mapping(F l, S r) { return S{r.a * l.a + r.size * l.b, r.size}; }
+
+F composition(F l, F r) { return F{r.a * l.a, r.b * l.a + l.b}; }
+
+F id() { return F{1, 0}; }
+
+struct lazy_segtree{
+    lazy_segtree() : lazy_segtree(0) {}
+    lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
+    lazy_segtree(const std::vector<S>& vec) : seg(vec) {}
+    void set(int p, S x) { seg.set(p, x); }
+    S get(int p) { return seg.get(p); }
+    S prod(int l, int r) { return seg.prod(l, r); }
+    S all_prod() { return seg.all_prod(); }
+    void apply(int p, F f) { seg.apply(p, f); }
+    void apply(int l, int r, F f) { seg.apply(l, r, f); }
+    private:
+        atcoder::lazy_segtree<S, op, e, F, mapping, composition, id> seg;
+};
 
 }

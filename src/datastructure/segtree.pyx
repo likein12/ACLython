@@ -65,15 +65,63 @@ def SegTree(v, op):
     elif op=="max":
         return SegTreeMax(v)
 
-# modintを入れる
+cdef extern from *:
+    ctypedef long long ll "long long"
+
 cdef extern from "./intermediate.hpp" namespace "aclython" nogil: 
-    cdef cppclass 
+    cdef cppclass S:
+        S(int, int)
+        S(S &)
+        int get_a()
+        int size
+    cdef cppclass F:
+        F(int, int)
+        F(F &)
+        int get_a()
+        int get_b()
     cdef cppclass lazy_segtree: 
         lazy_segtree(vector[S] v)
         void set(int p, S x)
         S get(int p)
         S prod(int l, int r)
         S all_prod()
-        void apply(int p, S x)
-        void apply(int l, int r, S x)
+        void apply(int p, F f)
+        void apply(int l, int r, F f)
 
+cdef class LazySegTree:
+    cdef lazy_segtree *_thisptr
+    def __cinit__(self, vector[vector[int]] v):
+        cdef int n = v.size()
+        cdef vector[S] *sv = new vector[S]()
+        cdef S *s
+        for i in range(n):
+            s = new S(v.at(i).at(0), v.at(i).at(1))
+            sv.push_back(s[0])
+        self._thisptr = new lazy_segtree(sv[0])
+    cpdef void set(self, int p, vector[int] v):
+        cdef S *s = new S(v.at(0), v.at(1))
+        self._thisptr.set(p, s[0])
+    cpdef vector[int] get(self, int p):
+        cdef S *s = new S(self._thisptr.get(p))
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef vector[int] prod(self, int l, int r):
+        cdef S *s = new S(self._thisptr.prod(l, r))
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef vector[int] all_prod(self):
+        cdef S *s = new S(self._thisptr.all_prod())
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef void apply(self, int p, vector[int] v):
+        cdef F *f = new F(v.at(0), v.at(1))
+        self._thisptr.apply(p, f[0])
+    cpdef void apply_range(self, int l, int r, vector[int] v):
+        cdef F *f = new F(v.at(0), v.at(1))
+        self._thisptr.apply(l, r, f[0])
