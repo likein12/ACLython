@@ -1,11 +1,46 @@
+
+
 # distutils: language=c++
-# distutils: include_dirs=[/home/contestant/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/deoxy/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
 # cython: boundscheck=False
 # cython: wraparound=False
+
 from libcpp cimport bool
+from libcpp.string cimport string
 from libcpp.vector cimport vector
-cdef extern from "./intermediate.hpp" namespace "aclython" nogil: 
-    cdef cppclass segtree_min: 
+from libc.stdio cimport getchar, printf
+cpdef inline vector[int] ReadInt(int n):
+    cdef int b, c
+    cdef vector[int] *v = new vector[int]()
+    for i in range(n):
+        c = 0
+        while 1:
+            b = getchar() - 48
+            if b < 0: break
+            c = c * 10 + b
+        v.push_back(c)
+    return v[0]
+
+cpdef inline vector[string] Read(int n):
+    cdef char c
+    cdef vector[string] *vs = new vector[string]()
+    cdef string *s
+    for i in range(n):
+        s = new string()
+        while 1:
+            c = getchar()
+            if c<=32: break
+            s.push_back(c)
+        vs.push_back(s[0])
+    return vs[0]
+
+cpdef inline void PrintLongN(vector[long] l, int n):
+    for i in range(n): printf("%ld\n", l[i])
+
+cpdef inline void PrintLong(vector[long] l, int n):
+    for i in range(n): printf("%ld ", l[i])
+cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
+    cdef cppclass segtree_min:
         segtree_min(vector[int] v)
         void set(int p, int x)
         int get(int p)
@@ -68,7 +103,7 @@ def SegTree(v, op):
 cdef extern from *:
     ctypedef long long ll "long long"
 
-cdef extern from "./intermediate.hpp" namespace "aclython" nogil: 
+cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
     cdef cppclass S:
         S(int, int)
         S(S &)
@@ -79,7 +114,7 @@ cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
         F(F &)
         int get_a()
         int get_b()
-    cdef cppclass lazy_segtree: 
+    cdef cppclass lazy_segtree:
         lazy_segtree(vector[S] v)
         void set(int p, S x)
         S get(int p)
