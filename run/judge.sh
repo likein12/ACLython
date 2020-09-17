@@ -22,6 +22,4 @@ echo ====================================
 python3.8 ./copy_paster.py
 echo ====================================
 
-rm atcoder.cpp
-rm atcoder.cpython-38*
-rm atcoder.pyx
+rm atcoder*

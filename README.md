@@ -9,7 +9,7 @@
 | ---- | ---- | ---- | 
 |Dsu|dsu|〇|
 |FenwickTree|fenwick_tree|〇|
-|SegTree|segtree|〇|
+|SegTree|segtree|△|
 |LazySegTree|lazysegtree|△|
 |MfGraph|mf_graph|〇|
 |McfGraph|mcf_graph|〇|
@@ -26,6 +26,8 @@
 |LcpArrayNum|lcp_array|〇|
 |ZAlgorithm|z_algorithm|〇|
 |ZAlgorithmNum|z_algorithm|〇|
+
+注：SegTree, LazySegTreeに関しては完全にそのまま使えるというわけではありません。
 
 他のライブラリも鋭意作成中。
 
