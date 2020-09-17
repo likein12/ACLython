@@ -36,6 +36,9 @@ C++のSTLのwrap
 | ---- | ---- | ---- | 
 |Set|set|〇|
 |MultiSet|multiset| |
+|Deque|deque| |
+|PriorityQueue|priority_queue| |
+|Dict|unordered_map| |
 
 入出力関数
 |  wrapper名  |  C/C++関数  | 開発済 |

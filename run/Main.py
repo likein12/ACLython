@@ -1,4 +1,18 @@
 header_code = """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
 #include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
 #include "/opt/atcoder-stl/atcoder/modint.hpp"
@@ -220,67 +234,35 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.string cimport string
-from libcpp.vector cimport vector
-from libc.stdio cimport getchar, printf
+from cython.operator cimport dereference
+from libcpp cimport bool
+from libcpp.deque cimport deque
+
 cdef extern from *:
     ctypedef long long ll "long long"
 
-cdef extern from "<atcoder/string>" namespace "atcoder":
-    vector[int] lcp_array(string s, vector[int] sa)
-    vector[int] lcp_array[ll](vector[ll] s, vector[int] sa)
-
-cpdef vector[int] LcpArray(string s, vector[int] sa):
-    return lcp_array(s, sa)
-
-cpdef vector[int] LcpArrayNum(vector[ll] s, vector[int] sa):
-    return lcp_array(s, sa)
-cpdef inline vector[int] ReadInt(int n):
-    cdef int b, c
-    cdef vector[int] *v = new vector[int]()
-    for i in range(n):
-        c = 0
-        while 1:
-            b = getchar() - 48
-            if b < 0: break
-            c = c * 10 + b
-        v.push_back(c)
-    return v[0]
-
-cpdef inline vector[string] Read(int n):
-    cdef char c
-    cdef vector[string] *vs = new vector[string]()
-    cdef string *s
-    for i in range(n):
-        s = new string()
-        while 1:
-            c = getchar()
-            if c<=32: break
-            s.push_back(c)
-        vs.push_back(s[0])
-    return vs[0]
-
-cpdef inline void PrintLongN(vector[long] l, int n):
-    for i in range(n): printf("%ld\\n", l[i])
-
-cpdef inline void PrintLong(vector[long] l, int n):
-    for i in range(n): printf("%ld ", l[i])
-cdef extern from *:
-    ctypedef long long ll "long long"
-
-cdef extern from "<atcoder/string>" namespace "atcoder":
-    vector[int] suffix_array(string s)
-    vector[int] suffix_array[ll](vector[ll] s)
-    vector[int] suffix_array(vector[int] s, int upper)
-
-cpdef vector[int] SuffixArray(string s):
-    return suffix_array(s)
-
-cpdef vector[int] SuffixArrayNum(vector[ll] s):
-    return suffix_array(s)
-
-cpdef vector[int] SuffixArrayNumUp(vector[int] s, int upper):
-    return suffix_array(s, upper)
+cdef class Deque:
+    cdef deque[ll] *_thisptr
+    def __cinit__(self):
+        self._thisptr = new deque[ll]()
+    cpdef void append(self, ll l):
+        self._thisptr.push_back(l)
+    cpdef void appendleft(self, ll l):
+        self._thisptr.push_front(l)
+    cpdef ll pop(self):
+        cdef ll l = dereference(self._thisptr.rbegin())
+        self._thisptr.pop_back()
+        return l
+    cpdef ll popleft(self):
+        cdef ll l = dereference(self._thisptr.begin())
+        self._thisptr.pop_front()
+        return l
+    def __getitem__(self, x):
+        return self._thisptr[0][x]
+    cpdef bool empty(self):
+        return self._thisptr.empty()
+    cpdef int size(self):
+        return self._thisptr.size()
 """
 
 
@@ -294,14 +276,13 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import Read, SuffixArray, LcpArray
+from atcoder import Deque
+from collections import deque
 
-def main():
-    S = Read(1)[0]
-    sa = SuffixArray(S)
-    ans = (len(S) * (len(S)+1))//2
-    for x in LcpArray(S, sa):
-        ans -= x
-    print(ans)
-if __name__=="__main__":
-    main()
+d = Deque()
+
+for i in range(10000000):
+    d.append(i)
+
+for i in range(10000000):
+    d.pop()
