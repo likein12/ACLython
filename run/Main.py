@@ -1,4 +1,17 @@
 header_code = """
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
 #include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
 #include "/opt/atcoder-stl/atcoder/modint.hpp"
@@ -220,21 +233,27 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.string cimport string
-from libcpp.vector cimport vector
 from libc.stdio cimport getchar, printf
-cdef extern from *:
-    ctypedef long long ll "long long"
+from libcpp.vector cimport vector
+from libcpp cimport bool
+from libcpp.string cimport string
+cdef extern from "<atcoder/twosat>" namespace "atcoder":
+    cdef cppclass two_sat:
+        two_sat(int n)
+        void add_clause(int i, bool f, int j, bool g)
+        bool satisfiable()
+        vector[bool] answer()
 
-cdef extern from "<atcoder/string>" namespace "atcoder":
-    vector[int] lcp_array(string s, vector[int] sa)
-    vector[int] lcp_array[ll](vector[ll] s, vector[int] sa)
-
-cpdef vector[int] LcpArray(string s, vector[int] sa):
-    return lcp_array(s, sa)
-
-cpdef vector[int] LcpArrayNum(vector[ll] s, vector[int] sa):
-    return lcp_array(s, sa)
+cdef class TwoSat:
+    cdef two_sat *_thisptr
+    def __cinit__(self, int n):
+        self._thisptr = new two_sat(n)
+    cpdef void add_clause(self, int i, bool f, int j, bool g):
+        self._thisptr.add_clause(i, f, j, g)
+    cpdef bool satisfiable(self):
+        return self._thisptr.satisfiable()
+    cpdef vector[bool] answer(self):
+        return self._thisptr.answer()
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
     cdef vector[int] *v = new vector[int]()
@@ -265,22 +284,6 @@ cpdef inline void PrintLongN(vector[long] l, int n):
 
 cpdef inline void PrintLong(vector[long] l, int n):
     for i in range(n): printf("%ld ", l[i])
-cdef extern from *:
-    ctypedef long long ll "long long"
-
-cdef extern from "<atcoder/string>" namespace "atcoder":
-    vector[int] suffix_array(string s)
-    vector[int] suffix_array[ll](vector[ll] s)
-    vector[int] suffix_array(vector[int] s, int upper)
-
-cpdef vector[int] SuffixArray(string s):
-    return suffix_array(s)
-
-cpdef vector[int] SuffixArrayNum(vector[ll] s):
-    return suffix_array(s)
-
-cpdef vector[int] SuffixArrayNumUp(vector[int] s, int upper):
-    return suffix_array(s, upper)
 """
 
 
@@ -294,14 +297,26 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import Read, SuffixArray, LcpArray
+from atcoder import ReadInt, TwoSat, PrintLongN
 
 def main():
-    S = Read(1)[0]
-    sa = SuffixArray(S)
-    ans = (len(S) * (len(S)+1))//2
-    for x in LcpArray(S, sa):
-        ans -= x
-    print(ans)
+  N,D=ReadInt(2)
+  xy = ReadInt(2*N)
+  ts=TwoSat(N)
+  for i in range(N-1):
+    for j in range(i+1,N):
+      for k1,k2 in [(0,0),(0,1),(1,0),(1,1)]:
+        pos1,pos2 = xy[2*i+k1],xy[2*j+k2]
+        if abs(pos2-pos1)<D:
+          ts.add_clause(i,k1^1,j,k2^1)
+
+  if ts.satisfiable():
+    print('Yes')
+    ans = ts.answer()
+    ans = [xy[2*i+ans[i]] for i in range(N)]
+    PrintLongN(ans, len(ans))
+  else:
+    print('No')
+
 if __name__=="__main__":
-    main()
+  main()

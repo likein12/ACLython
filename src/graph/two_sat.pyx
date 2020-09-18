@@ -14,7 +14,7 @@ cdef extern from "<atcoder/twosat>" namespace "atcoder":
 cdef class TwoSat:
     cdef two_sat *_thisptr
     def __cinit__(self, int n):
-        self._thisptr = two_sat(n)
+        self._thisptr = new two_sat(n)
     cpdef void add_clause(self, int i, bool f, int j, bool g):
         self._thisptr.add_clause(i, f, j, g)
     cpdef bool satisfiable(self): 
