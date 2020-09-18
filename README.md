@@ -35,7 +35,7 @@ C++のSTLのwrap
 |  wrapper名  |  STL  | 開発済 |
 | ---- | ---- | ---- | 
 |Set|set|〇|
-|MultiSet|multiset| |
+|MultiSet|multiset|〇|
 
 入出力関数
 |  wrapper名  |  C/C++関数  | 開発済 |
