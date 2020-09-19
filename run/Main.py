@@ -28,6 +28,9 @@ header_code = """
 
 
 
+
+
+
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
 #include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
 #include "/opt/atcoder-stl/atcoder/modint.hpp"
@@ -251,12 +254,12 @@ code = """
 
 from libcpp.utility cimport pair
 from libcpp.string cimport string
-from libcpp.vector cimport vector
-from cython.operator cimport dereference
-from libcpp cimport bool
 from cython.operator cimport preincrement
 from libc.stdio cimport getchar, printf
+from cython.operator cimport dereference
 from cython.operator cimport predecrement
+from libcpp.vector cimport vector
+from libcpp cimport bool
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
     cdef vector[int] *v = new vector[int]()
@@ -399,28 +402,54 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import MultiSet, ReadInt
+from atcoder import MultiSet, ReadInt, PrintLongN
 
 def main():
-    ms = MultiSet()
-    N = ReadInt(1)[0]
+    N,Q = ReadInt(2)
+    MS = [MultiSet() for i in range(2* (10**5))]
+    mms = MultiSet()
+    rate = [0]*N
+    Y = [0]*N
+    AB = ReadInt(2*N)
     for i in range(N):
-        A = ReadInt(1)[0]
-        if ms.empty():
-            ms.add(A)
-            continue
-        if A <= ms.min():
-            ms.add(A)
+        A,B = AB[2*i],AB[2*i+1]
+        B-=1
+        Y[i] = B
+        rate[i] = A
+        MS[B].add(A)
+    ans = []
+    for i in range(2*(10**5)):
+        if not MS[i].empty():
+            mms.add(MS[i].max())
+    query = ReadInt(2*Q)
+    for i in range(Q):
+        C,D = query[2*i],query[2*i+1]
+        C -= 1
+        D -= 1
+        prevD = Y[C]
+        Y[C] = D
+        prevMax = MS[prevD].max()
+        MS[prevD].remove(rate[C])
+        if MS[prevD].empty():
+            mms.remove(prevMax)
         else:
-            b = ms.lower_bound(A)
-            if b is None:
-                ms.pop_max()
-                ms.add(A)
-            else:
-                c = ms.prev(b)
-                ms.remove(c)
-                ms.add(A)
-    print(ms.size())
+            newMax = MS[prevD].max()
+            if newMax!=prevMax:
+                mms.remove(prevMax)
+                mms.add(newMax)
+        if MS[D].empty():
+            MS[D].add(rate[C])
+            mms.add(rate[C])
+        else:
+            prevMax = MS[D].max()
+            MS[D].add(rate[C])
+            newMax = MS[D].max()
+            if newMax!=prevMax:
+                mms.remove(prevMax)
+                mms.add(newMax)
+        ans.append(mms.min())
+    PrintLongN(ans)
+
 
 if __name__ == "__main__":
     main()
