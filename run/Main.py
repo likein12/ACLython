@@ -13,6 +13,12 @@ header_code = """
 
 
 
+
+
+
+
+
+
 #include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
 #include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
 #include "/opt/atcoder-stl/atcoder/modint.hpp"
@@ -234,35 +240,14 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from cython.operator cimport dereference
-from libcpp cimport bool
-from libcpp.deque cimport deque
+from libcpp.algorithm cimport sort
+from libcpp.vector cimport vector
 
 cdef extern from *:
     ctypedef long long ll "long long"
 
-cdef class Deque:
-    cdef deque[ll] *_thisptr
-    def __cinit__(self):
-        self._thisptr = new deque[ll]()
-    cpdef void append(self, ll l):
-        self._thisptr.push_back(l)
-    cpdef void appendleft(self, ll l):
-        self._thisptr.push_front(l)
-    cpdef ll pop(self):
-        cdef ll l = dereference(self._thisptr.rbegin())
-        self._thisptr.pop_back()
-        return l
-    cpdef ll popleft(self):
-        cdef ll l = dereference(self._thisptr.begin())
-        self._thisptr.pop_front()
-        return l
-    def __getitem__(self, x):
-        return self._thisptr[0][x]
-    cpdef bool empty(self):
-        return self._thisptr.empty()
-    cpdef int size(self):
-        return self._thisptr.size()
+cpdef void Sort(vector[ll] v):
+    sort(v.begin(), v.end())
 """
 
 
@@ -276,13 +261,8 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import Deque
-from collections import deque
+from atcoder import Sort
 
-d = Deque()
+A = list(range(10000000))
 
-for i in range(10000000):
-    d.append(i)
-
-for i in range(10000000):
-    d.pop()
+Sort(A)

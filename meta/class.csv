@@ -24,3 +24,5 @@ PrintLong,utility/stdio.pyx
 Set,stl/set.pyx
 MultiSet,stl/multiset.pyx
 Deque,stl/deque.pyx
+PriorityQueue,stl/priority_queue.pyx
+Sort,stl/algorithm.pyx

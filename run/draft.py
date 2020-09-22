@@ -1,10 +1,5 @@
-from atcoder import Deque
-from collections import deque
+from atcoder import Sort
 
-d = Deque()
+A = list(range(10000000))
 
-for i in range(10000000):
-    d.append(i)
-
-for i in range(10000000):
-    d.pop()
+Sort(A)
