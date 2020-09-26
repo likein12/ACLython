@@ -3,37 +3,9 @@ header_code = """
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
-#include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
-#include "/opt/atcoder-stl/atcoder/modint.hpp"
+#include "/opt/ac-library/atcoder/internal_bit.hpp"
+#include "/opt/ac-library/atcoder/lazysegtree.hpp"
+#include "/opt/ac-library/atcoder/modint.hpp"
 #include <vector>
 #include <algorithm>
 #include <cassert>
@@ -248,16 +220,12 @@ struct lazy_segtree{
 code = """
 
 # distutils: language=c++
-# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/ac-library]
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.utility cimport pair
 from libcpp.string cimport string
-from cython.operator cimport preincrement
 from libc.stdio cimport getchar, printf
-from cython.operator cimport dereference
-from cython.operator cimport predecrement
 from libcpp.vector cimport vector
 from libcpp cimport bool
 cpdef inline vector[int] ReadInt(int n):
@@ -292,103 +260,127 @@ cpdef inline void PrintLongN(vector[long] l):
 cpdef inline void PrintLong(vector[long] l):
     cdef int n = l.size()
     for i in range(n): printf("%ld ", l[i])
-cdef extern from "<set>" namespace "std" nogil:
-    cdef cppclass multiset[T]:
-        ctypedef T value_type
-        cppclass iterator:
-            T& operator*()
-            iterator operator++()
-            iterator operator--()
-            bint operator==(iterator)
-            bint operator!=(iterator)
-        cppclass reverse_iterator:
-            T& operator*()
-            iterator operator++()
-            iterator operator--()
-            bint operator==(reverse_iterator)
-            bint operator!=(reverse_iterator)
-        cppclass const_iterator(iterator):
-            pass
-        cppclass const_reverse_iterator(reverse_iterator):
-            pass
-        multiset() except +
-        multiset(multiset&) except +
-        iterator begin()
-        reverse_iterator rbegin()
-        size_t count(const T&)
-        bint empty()
-        iterator end()
-        reverse_iterator rend()
-        iterator find(T&)
-        size_t size()
-        iterator upper_bound(const T&)
-        iterator lower_bound(T&)
-        pair[iterator, bint] insert(const T&) except +
-        iterator erase(iterator)
+cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
+    cdef cppclass segtree_min:
+        segtree_min(vector[int] v)
+        void set(int p, int x)
+        int get(int p)
+        int prod(int l, int r)
+        int all_prod()
+        int max_right(int l, int v)
+        int min_left(int r, int v)
+
+cdef class SegTreeMin:
+    cdef segtree_min *_thisptr
+    def __cinit__(self, vector[int] v):
+        self._thisptr = new segtree_min(v)
+    cpdef void set(self, int p, int x):
+        self._thisptr.set(p, x)
+    cpdef int get(self, int p):
+        return self._thisptr.get(p)
+    cpdef int prod(self, int l, int r):
+        return self._thisptr.prod(l, r)
+    cpdef int all_prod(self):
+        return self._thisptr.all_prod()
+    cpdef int max_right(self, int l, int v):
+        return self._thisptr.max_right(l, v)
+    cpdef int min_left(self, int r, int v):
+        self._thisptr.min_left(r, v)
+
+cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
+    cdef cppclass segtree_max:
+        segtree_max(vector[int] v)
+        void set(int p, int x)
+        int get(int p)
+        int prod(int l, int r)
+        int all_prod()
+        int max_right(int l, int v)
+        int min_left(int r, int v)
+
+cdef class SegTreeMax:
+    cdef segtree_max *_thisptr
+    def __cinit__(self, vector[int] v):
+        self._thisptr = new segtree_max(v)
+    cpdef void set(self, int p, int x):
+        self._thisptr.set(p, x)
+    cpdef int get(self, int p):
+        return self._thisptr.get(p)
+    cpdef int prod(self, int l, int r):
+        return self._thisptr.prod(l, r)
+    cpdef int all_prod(self):
+        return self._thisptr.all_prod()
+    cpdef int max_right(self, int l, int v):
+        return self._thisptr.max_right(l, v)
+    cpdef int min_left(self, int r, int v):
+        self._thisptr.min_left(r, v)
+
+
+def SegTree(v, op):
+    if op=="min":
+        return SegTreeMin(v)
+    elif op=="max":
+        return SegTreeMax(v)
 
 cdef extern from *:
     ctypedef long long ll "long long"
 
+cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
+    cdef cppclass S:
+        S(int, int)
+        S(S &)
+        int get_a()
+        int size
+    cdef cppclass F:
+        F(int, int)
+        F(F &)
+        int get_a()
+        int get_b()
+    cdef cppclass lazy_segtree:
+        lazy_segtree(vector[S] v)
+        void set(int p, S x)
+        S get(int p)
+        S prod(int l, int r)
+        S all_prod()
+        void apply(int p, F f)
+        void apply(int l, int r, F f)
 
-cdef class MultiSet:
-    cdef multiset[ll] *_thisptr
-    def __cinit__(self):
-        self._thisptr = new multiset[ll]()
-    cpdef int size(self):
-        return self._thisptr.size()
-    cpdef bool empty(self):
-        return self._thisptr.empty()
-    cpdef void add(self, ll x):
-        self._thisptr.insert(x)
-    cpdef void remove(self, ll x):
-        self._thisptr.erase(self._thisptr.find(x))
-    cpdef int count(self, ll x):
-        return self._thisptr.count(x)
-    cpdef ll min(self):
-        return dereference(self._thisptr.begin())
-    cpdef ll max(self):
-        return dereference(self._thisptr.rbegin())
-    def lower_bound(self, x):
-        cdef multiset[ll].iterator itr = self._thisptr.lower_bound(x)
-        if itr == self._thisptr.end():
-            return None
-        else:
-            return dereference(itr)
-    def upper_bound(self, ll x):
-        cdef multiset[ll].iterator itr = self._thisptr.upper_bound(x)
-        if itr == self._thisptr.end():
-            return None
-        else:
-            return dereference(itr)
-    def next(self, x):
-        if x >= self.max():
-            return None
-        cdef multiset[ll].iterator itr = self._thisptr.find(x)
-        cdef int c = self._thisptr.count(x)
-        for i in range(c):
-            preincrement(itr)
-        return dereference(itr)
-    cpdef prev(self, x):
-        if x <= self.min():
-            return None
-        cdef multiset[ll].iterator itr = self._thisptr.find(x)
-        predecrement(itr)
-        return dereference(itr)
-    cpdef ll pop_min(self):
-        cdef multiset[ll].iterator itr = self._thisptr.begin()
-        cdef ll ret = dereference(itr)
-        self._thisptr.erase(itr)
-        return ret
-    cpdef ll pop_max(self):
-        cdef multiset[ll].reverse_iterator itr = self._thisptr.rbegin()
-        cdef ll ret = dereference(itr)
-        self._thisptr.erase(self._thisptr.find(ret))
-        return ret
-    def __contains__(self, x):
-        if self._thisptr.find(x)==self._thisptr.end():
-            return False
-        else:
-            return True
+cdef class LazySegTree:
+    cdef lazy_segtree *_thisptr
+    def __cinit__(self, vector[vector[int]] v):
+        cdef int n = v.size()
+        cdef vector[S] *sv = new vector[S]()
+        cdef S *s
+        for i in range(n):
+            s = new S(v.at(i).at(0), v.at(i).at(1))
+            sv.push_back(s[0])
+        self._thisptr = new lazy_segtree(sv[0])
+    cpdef void set(self, int p, vector[int] v):
+        cdef S *s = new S(v.at(0), v.at(1))
+        self._thisptr.set(p, s[0])
+    cpdef vector[int] get(self, int p):
+        cdef S *s = new S(self._thisptr.get(p))
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef vector[int] prod(self, int l, int r):
+        cdef S *s = new S(self._thisptr.prod(l, r))
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef vector[int] all_prod(self):
+        cdef S *s = new S(self._thisptr.all_prod())
+        cdef vector[int] *v = new vector[int]()
+        v.push_back(s.get_a())
+        v.push_back(s.size)
+        return v[0]
+    cpdef void apply(self, int p, vector[int] v):
+        cdef F *f = new F(v.at(0), v.at(1))
+        self._thisptr.apply(p, f[0])
+    cpdef void apply_range(self, int l, int r, vector[int] v):
+        cdef F *f = new F(v.at(0), v.at(1))
+        self._thisptr.apply(l, r, f[0])
 """
 
 
@@ -402,54 +394,24 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import MultiSet, ReadInt, PrintLongN
+from atcoder import SegTree, ReadInt
 
 def main():
-    N,Q = ReadInt(2)
-    MS = [MultiSet() for i in range(2* (10**5))]
-    mms = MultiSet()
-    rate = [0]*N
-    Y = [0]*N
-    AB = ReadInt(2*N)
+    N,x = ReadInt(2)
+    A = ReadInt(N)
+    ST = SegTree(A,"min")
+    ans = 10**27
     for i in range(N):
-        A,B = AB[2*i],AB[2*i+1]
-        B-=1
-        Y[i] = B
-        rate[i] = A
-        MS[B].add(A)
-    ans = []
-    for i in range(2*(10**5)):
-        if not MS[i].empty():
-            mms.add(MS[i].max())
-    query = ReadInt(2*Q)
-    for i in range(Q):
-        C,D = query[2*i],query[2*i+1]
-        C -= 1
-        D -= 1
-        prevD = Y[C]
-        Y[C] = D
-        prevMax = MS[prevD].max()
-        MS[prevD].remove(rate[C])
-        if MS[prevD].empty():
-            mms.remove(prevMax)
-        else:
-            newMax = MS[prevD].max()
-            if newMax!=prevMax:
-                mms.remove(prevMax)
-                mms.add(newMax)
-        if MS[D].empty():
-            MS[D].add(rate[C])
-            mms.add(rate[C])
-        else:
-            prevMax = MS[D].max()
-            MS[D].add(rate[C])
-            newMax = MS[D].max()
-            if newMax!=prevMax:
-                mms.remove(prevMax)
-                mms.add(newMax)
-        ans.append(mms.min())
-    PrintLongN(ans)
+        t = 0
+        for j in range(N):
+            if j-i<0:
+                t += min(ST.prod(0,j+1),ST.prod(N+j-i,N))
+            else:
+                t += ST.prod(j-i,j+1)
 
+        ans = min(t+i*x,ans)
 
-if __name__ == "__main__":
+    print(ans)
+
+if __name__=="__main__":
     main()

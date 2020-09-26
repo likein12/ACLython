@@ -1,51 +1,35 @@
-from atcoder import MultiSet, ReadInt, PrintLongN
+from atcoder import Read, ReadInt
+
+def smax(a,b):
+    return a if a>b else b
+
+def analyze(S):
+    max_r = 0
+    r = 0
+    for i in range(len(S)):
+        if S[i]=="(":
+            r-=1
+        else:
+            r+=1
+            max_r = smax(r,max_r)
+    max_l = 0
+    l = 0
+    for i in range(len(S)):
+        if S[len(S)-i-1]==")":
+            l-=1
+        else:
+            l+=1
+            max_l = smax(l,max_l)
+    return max_r, max_l
+
 
 def main():
-    N,Q = ReadInt(2)
-    MS = [MultiSet() for i in range(2* (10**5))]
-    mms = MultiSet()
-    rate = [0]*N
-    Y = [0]*N
-    AB = ReadInt(2*N)
-    for i in range(N):
-        A,B = AB[2*i],AB[2*i+1]
-        B-=1
-        Y[i] = B
-        rate[i] = A
-        MS[B].add(A)
-    ans = []
-    for i in range(2*(10**5)):
-        if not MS[i].empty():
-            mms.add(MS[i].max())
-    query = ReadInt(2*Q)
-    for i in range(Q):
-        C,D = query[2*i],query[2*i+1]
-        C -= 1
-        D -= 1
-        prevD = Y[C]
-        Y[C] = D
-        prevMax = MS[prevD].max()
-        MS[prevD].remove(rate[C])
-        if MS[prevD].empty():
-            mms.remove(prevMax)
-        else:
-            newMax = MS[prevD].max()
-            if newMax!=prevMax:
-                mms.remove(prevMax)
-                mms.add(newMax)
-        if MS[D].empty():
-            MS[D].add(rate[C])
-            mms.add(rate[C])
-        else:
-            prevMax = MS[D].max()
-            MS[D].add(rate[C])
-            newMax = MS[D].max()
-            if newMax!=prevMax:
-                mms.remove(prevMax)
-                mms.add(newMax)
-        ans.append(mms.min())
-    PrintLongN(ans)
+    N = ReadInt(1)[0]
+    res = [Read() for i in range(N)]
+    res.sort(lambda x:x[0])
+    res.sort(lambda x:x[1],reverse=True)
 
 
-if __name__ == "__main__":
+
+if __name__=="__main__":
     main()

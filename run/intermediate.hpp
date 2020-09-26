@@ -3,37 +3,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#include "/opt/atcoder-stl/atcoder/internal_bit.hpp"
-#include "/opt/atcoder-stl/atcoder/lazysegtree.hpp"
-#include "/opt/atcoder-stl/atcoder/modint.hpp"
+#include "/opt/ac-library/atcoder/internal_bit.hpp"
+#include "/opt/ac-library/atcoder/lazysegtree.hpp"
+#include "/opt/ac-library/atcoder/modint.hpp"
 #include <vector>
 #include <algorithm>
 #include <cassert>
