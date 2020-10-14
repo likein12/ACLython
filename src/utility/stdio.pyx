@@ -30,8 +30,10 @@ cpdef inline vector[string] Read(int n):
         vs.push_back(s[0])
     return vs[0]
 
-cpdef inline void PrintLongN(vector[long] l, int n):  
+cpdef inline void PrintLongN(vector[long] l):
+    cdef int n = l.size()
     for i in range(n): printf("%ld\\n", l[i])
 
-cpdef inline void PrintLong(vector[long] l, int n): 
+cpdef inline void PrintLong(vector[long] l): 
+    cdef int n = l.size()
     for i in range(n): printf("%ld ", l[i])

@@ -26,15 +26,27 @@ cdef class Set:
         return dereference(self._thisptr.begin())
     cpdef ll max(self):
         return dereference(self._thisptr.rbegin())
-    cpdef ll lower_bound(self, ll x):
-        return dereference(self._thisptr.lower_bound(x))
-    cpdef ll upper_bound(self, ll x):
-        return dereference(self._thisptr.upper_bound(x))
-    cpdef ll next(self, ll x):
+    def lower_bound(self, ll x):
+        cdef set[ll].iterator itr = self._thisptr.lower_bound(x)
+        if itr == self._thisptr.end():
+            return None
+        else:
+            return dereference(itr)
+    def upper_bound(self, ll x):
+        cdef set[ll].iterator itr = self._thisptr.upper_bound(x)
+        if itr == self._thisptr.end():
+            return None
+        else:
+            return dereference(itr)
+    def next(self, ll x):
+        if x >= self.max():
+            return None
         cdef set[ll].iterator itr = self._thisptr.find(x)
         preincrement(itr)
         return dereference(itr)
-    cpdef ll prev(self, ll x):
+    def prev(self, ll x):
+        if x <= self.min():
+            return None
         cdef set[ll].iterator itr = self._thisptr.find(x)
         predecrement(itr)
         return dereference(itr)

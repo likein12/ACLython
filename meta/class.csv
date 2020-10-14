@@ -23,3 +23,4 @@ PrintLongN,utility/stdio.pyx
 PrintLong,utility/stdio.pyx
 Set,stl/set.pyx
 MultiSet,stl/multiset.pyx
+MInt,math/modint.pyx

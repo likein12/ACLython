@@ -12,9 +12,8 @@ cdef extern from "<atcoder/string>" namespace "atcoder":
     vector[int] suffix_array[ll](vector[ll] s)
     vector[int] suffix_array(vector[int] s, int upper)
 
-def SuffixArray(s):
-    cdef cs = s.encode()
-    return suffix_array(cs)
+cpdef vector[int] SuffixArray(string s):
+    return suffix_array(s)
 
 cpdef vector[int] SuffixArrayNum(vector[ll] s):
     return suffix_array(s)

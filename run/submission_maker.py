@@ -45,7 +45,7 @@ cython_code = """
 code = \"\"\"
 
 # distutils: language=c++
-# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/atcoder-stl]
+# distutils: include_dirs=[/home/USERNAME/.local/lib/python3.8/site-packages/numpy/core/include, /opt/ac-library]
 # cython: boundscheck=False
 # cython: wraparound=False
 

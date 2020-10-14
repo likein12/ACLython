@@ -1,35 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #include "/opt/ac-library/atcoder/internal_bit.hpp"
 #include "/opt/ac-library/atcoder/lazysegtree.hpp"
 #include "/opt/ac-library/atcoder/modint.hpp"
