@@ -3,6 +3,33 @@ header_code = """
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include "/opt/ac-library/atcoder/internal_bit.hpp"
 #include "/opt/ac-library/atcoder/lazysegtree.hpp"
 #include "/opt/ac-library/atcoder/modint.hpp"
@@ -224,10 +251,72 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp.string cimport string
-from libc.stdio cimport getchar, printf
-from libcpp.vector cimport vector
 from libcpp cimport bool
+from libcpp.vector cimport vector
+from libcpp.string cimport string
+from cython.operator cimport predecrement
+from cython.operator cimport preincrement
+from cython.operator cimport dereference
+from libc.stdio cimport getchar, printf
+from libcpp.set cimport set
+cdef extern from *:
+    ctypedef long long ll "long long"
+
+cdef class Set:
+    cdef set[ll] *_thisptr
+    def __cinit__(self):
+        self._thisptr = new set[ll]()
+    cpdef int size(self):
+        return self._thisptr.size()
+    cpdef bool empty(self):
+        return self._thisptr.empty()
+    cpdef void add(self, ll x):
+        self._thisptr.insert(x)
+    cpdef void remove(self, ll x):
+        self._thisptr.erase(self._thisptr.find(x))
+    cpdef ll min(self):
+        return dereference(self._thisptr.begin())
+    cpdef ll max(self):
+        return dereference(self._thisptr.rbegin())
+    def lower_bound(self, ll x):
+        cdef set[ll].iterator itr = self._thisptr.lower_bound(x)
+        if itr == self._thisptr.end():
+            return None
+        else:
+            return dereference(itr)
+    def upper_bound(self, ll x):
+        cdef set[ll].iterator itr = self._thisptr.upper_bound(x)
+        if itr == self._thisptr.end():
+            return None
+        else:
+            return dereference(itr)
+    def next(self, ll x):
+        if x >= self.max():
+            return None
+        cdef set[ll].iterator itr = self._thisptr.find(x)
+        preincrement(itr)
+        return dereference(itr)
+    def prev(self, ll x):
+        if x <= self.min():
+            return None
+        cdef set[ll].iterator itr = self._thisptr.find(x)
+        predecrement(itr)
+        return dereference(itr)
+    cpdef ll pop_min(self):
+        cdef set[ll].iterator itr = self._thisptr.begin()
+        cdef ll ret = dereference(itr)
+        self._thisptr.erase(itr)
+        return ret
+    cpdef ll pop_max(self):
+        cdef set[ll].reverse_iterator itr = self._thisptr.rbegin()
+        cdef ll ret = dereference(itr)
+        self._thisptr.erase(self._thisptr.find(ret))
+        return ret
+    def __contains__(self, x):
+        if self._thisptr.find(x)==self._thisptr.end():
+            return False
+        else:
+            return True
 cpdef inline vector[int] ReadInt(int n):
     cdef int b, c
     cdef vector[int] *v = new vector[int]()
@@ -260,127 +349,6 @@ cpdef inline void PrintLongN(vector[long] l):
 cpdef inline void PrintLong(vector[long] l):
     cdef int n = l.size()
     for i in range(n): printf("%ld ", l[i])
-cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
-    cdef cppclass segtree_min:
-        segtree_min(vector[int] v)
-        void set(int p, int x)
-        int get(int p)
-        int prod(int l, int r)
-        int all_prod()
-        int max_right(int l, int v)
-        int min_left(int r, int v)
-
-cdef class SegTreeMin:
-    cdef segtree_min *_thisptr
-    def __cinit__(self, vector[int] v):
-        self._thisptr = new segtree_min(v)
-    cpdef void set(self, int p, int x):
-        self._thisptr.set(p, x)
-    cpdef int get(self, int p):
-        return self._thisptr.get(p)
-    cpdef int prod(self, int l, int r):
-        return self._thisptr.prod(l, r)
-    cpdef int all_prod(self):
-        return self._thisptr.all_prod()
-    cpdef int max_right(self, int l, int v):
-        return self._thisptr.max_right(l, v)
-    cpdef int min_left(self, int r, int v):
-        self._thisptr.min_left(r, v)
-
-cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
-    cdef cppclass segtree_max:
-        segtree_max(vector[int] v)
-        void set(int p, int x)
-        int get(int p)
-        int prod(int l, int r)
-        int all_prod()
-        int max_right(int l, int v)
-        int min_left(int r, int v)
-
-cdef class SegTreeMax:
-    cdef segtree_max *_thisptr
-    def __cinit__(self, vector[int] v):
-        self._thisptr = new segtree_max(v)
-    cpdef void set(self, int p, int x):
-        self._thisptr.set(p, x)
-    cpdef int get(self, int p):
-        return self._thisptr.get(p)
-    cpdef int prod(self, int l, int r):
-        return self._thisptr.prod(l, r)
-    cpdef int all_prod(self):
-        return self._thisptr.all_prod()
-    cpdef int max_right(self, int l, int v):
-        return self._thisptr.max_right(l, v)
-    cpdef int min_left(self, int r, int v):
-        self._thisptr.min_left(r, v)
-
-
-def SegTree(v, op):
-    if op=="min":
-        return SegTreeMin(v)
-    elif op=="max":
-        return SegTreeMax(v)
-
-cdef extern from *:
-    ctypedef long long ll "long long"
-
-cdef extern from "./intermediate.hpp" namespace "aclython" nogil:
-    cdef cppclass S:
-        S(int, int)
-        S(S &)
-        int get_a()
-        int size
-    cdef cppclass F:
-        F(int, int)
-        F(F &)
-        int get_a()
-        int get_b()
-    cdef cppclass lazy_segtree:
-        lazy_segtree(vector[S] v)
-        void set(int p, S x)
-        S get(int p)
-        S prod(int l, int r)
-        S all_prod()
-        void apply(int p, F f)
-        void apply(int l, int r, F f)
-
-cdef class LazySegTree:
-    cdef lazy_segtree *_thisptr
-    def __cinit__(self, vector[vector[int]] v):
-        cdef int n = v.size()
-        cdef vector[S] *sv = new vector[S]()
-        cdef S *s
-        for i in range(n):
-            s = new S(v.at(i).at(0), v.at(i).at(1))
-            sv.push_back(s[0])
-        self._thisptr = new lazy_segtree(sv[0])
-    cpdef void set(self, int p, vector[int] v):
-        cdef S *s = new S(v.at(0), v.at(1))
-        self._thisptr.set(p, s[0])
-    cpdef vector[int] get(self, int p):
-        cdef S *s = new S(self._thisptr.get(p))
-        cdef vector[int] *v = new vector[int]()
-        v.push_back(s.get_a())
-        v.push_back(s.size)
-        return v[0]
-    cpdef vector[int] prod(self, int l, int r):
-        cdef S *s = new S(self._thisptr.prod(l, r))
-        cdef vector[int] *v = new vector[int]()
-        v.push_back(s.get_a())
-        v.push_back(s.size)
-        return v[0]
-    cpdef vector[int] all_prod(self):
-        cdef S *s = new S(self._thisptr.all_prod())
-        cdef vector[int] *v = new vector[int]()
-        v.push_back(s.get_a())
-        v.push_back(s.size)
-        return v[0]
-    cpdef void apply(self, int p, vector[int] v):
-        cdef F *f = new F(v.at(0), v.at(1))
-        self._thisptr.apply(p, f[0])
-    cpdef void apply_range(self, int l, int r, vector[int] v):
-        cdef F *f = new F(v.at(0), v.at(1))
-        self._thisptr.apply(l, r, f[0])
 """
 
 
@@ -394,24 +362,42 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import SegTree, ReadInt
+from atcoder import ReadInt,PrintLongN,Set
+from collections import Counter
 
 def main():
-    N,x = ReadInt(2)
-    A = ReadInt(N)
-    ST = SegTree(A,"min")
-    ans = 10**27
-    for i in range(N):
-        t = 0
-        for j in range(N):
-            if j-i<0:
-                t += min(ST.prod(0,j+1),ST.prod(N+j-i,N))
+
+    N,Q = ReadInt(2)
+    s = Set()
+    c = Counter(ReadInt(N))
+    for k in c:
+        if c[k]%2==1:
+            s.add(k)
+
+    ans = []
+
+    for i in range(Q):
+        l,r,x = ReadInt(3)
+        g = s.lower_bound(l)
+        a = 0
+        count = 0
+        if g is not None:
+            while g <= r:
+                a ^= g
+                count += 1
+                g1 = s.next(g)
+                s.remove(g)
+                g = g1
+                if g is None:
+                    break
+        if count%2==1:
+            if x in s:
+                s.remove(x)
             else:
-                t += ST.prod(j-i,j+1)
+                s.add(x)
+        ans.append(a)
 
-        ans = min(t+i*x,ans)
+    PrintLongN(ans)
 
-    print(ans)
-
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

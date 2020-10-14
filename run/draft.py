@@ -1,35 +1,39 @@
-from atcoder import Read, ReadInt
-
-def smax(a,b):
-    return a if a>b else b
-
-def analyze(S):
-    max_r = 0
-    r = 0
-    for i in range(len(S)):
-        if S[i]=="(":
-            r-=1
-        else:
-            r+=1
-            max_r = smax(r,max_r)
-    max_l = 0
-    l = 0
-    for i in range(len(S)):
-        if S[len(S)-i-1]==")":
-            l-=1
-        else:
-            l+=1
-            max_l = smax(l,max_l)
-    return max_r, max_l
-
+from atcoder import ReadInt,PrintLongN
+from collections import Counter
 
 def main():
-    N = ReadInt(1)[0]
-    res = [Read() for i in range(N)]
-    res.sort(lambda x:x[0])
-    res.sort(lambda x:x[1],reverse=True)
 
+    N,Q = ReadInt(2)
+    s = Set()
+    c = Counter(ReadInt(N))
+    for k in c:
+        if c[k]%2==1:
+            s.add(k)
 
+    ans = []
 
-if __name__=="__main__":
+    for i in range(Q):
+        l,r,x = ReadInt(3)
+        g = s.lower_bound(l)
+        a = 0
+        count = 0
+        if g is not None:
+            while g <= r:
+                a ^= g
+                count += 1
+                g1 = s.next(g)
+                s.remove(g)
+                g = g1
+                if g is None:
+                    break
+        if count%2==1:
+            if x in s:
+                s.remove(x)
+            else:
+                s.add(x)
+        ans.append(a)
+
+    PrintLongN(ans)
+
+if __name__ == "__main__":
     main()
