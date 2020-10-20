@@ -24,3 +24,5 @@ PrintLong,utility/stdio.pyx
 Set,stl/set.pyx
 MultiSet,stl/multiset.pyx
 MInt,math/modint.pyx
+UMapLI,stl/umap.pyx
+Compression,utility/compression.pyx

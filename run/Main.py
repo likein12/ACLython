@@ -30,6 +30,49 @@ header_code = """
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include "/opt/ac-library/atcoder/internal_bit.hpp"
 #include "/opt/ac-library/atcoder/lazysegtree.hpp"
 #include "/opt/ac-library/atcoder/modint.hpp"
@@ -251,104 +294,40 @@ code = """
 # cython: boundscheck=False
 # cython: wraparound=False
 
-from libcpp cimport bool
 from libcpp.vector cimport vector
-from libcpp.string cimport string
-from cython.operator cimport predecrement
+from libcpp.unordered_map cimport unordered_map
 from cython.operator cimport preincrement
 from cython.operator cimport dereference
-from libc.stdio cimport getchar, printf
-from libcpp.set cimport set
+from libcpp.unordered_set cimport unordered_set
+from libcpp.algorithm cimport sort
+from libcpp.utility cimport pair
 cdef extern from *:
     ctypedef long long ll "long long"
 
-cdef class Set:
-    cdef set[ll] *_thisptr
-    def __cinit__(self):
-        self._thisptr = new set[ll]()
-    cpdef int size(self):
-        return self._thisptr.size()
-    cpdef bool empty(self):
-        return self._thisptr.empty()
-    cpdef void add(self, ll x):
-        self._thisptr.insert(x)
-    cpdef void remove(self, ll x):
-        self._thisptr.erase(self._thisptr.find(x))
-    cpdef ll min(self):
-        return dereference(self._thisptr.begin())
-    cpdef ll max(self):
-        return dereference(self._thisptr.rbegin())
-    def lower_bound(self, ll x):
-        cdef set[ll].iterator itr = self._thisptr.lower_bound(x)
-        if itr == self._thisptr.end():
-            return None
-        else:
-            return dereference(itr)
-    def upper_bound(self, ll x):
-        cdef set[ll].iterator itr = self._thisptr.upper_bound(x)
-        if itr == self._thisptr.end():
-            return None
-        else:
-            return dereference(itr)
-    def next(self, ll x):
-        if x >= self.max():
-            return None
-        cdef set[ll].iterator itr = self._thisptr.find(x)
+cpdef pair[vector[ll], unordered_map[ll, int]] Compression(vector[ll] l):
+    cdef unordered_set[ll] *s = new unordered_set[ll]()
+    cdef int i = 0
+    cdef int lsize = int(l.size())
+    while i < lsize:
+        s.insert(l.at(i))
+        i += 1
+    cdef vector[ll] *v = new vector[ll]()
+    cdef int ssize = s.size()
+    cdef unordered_set[ll].iterator itr = s.begin()
+    i = 0
+    while i < ssize:
+        v.push_back(dereference(itr))
+        i += 1
         preincrement(itr)
-        return dereference(itr)
-    def prev(self, ll x):
-        if x <= self.min():
-            return None
-        cdef set[ll].iterator itr = self._thisptr.find(x)
-        predecrement(itr)
-        return dereference(itr)
-    cpdef ll pop_min(self):
-        cdef set[ll].iterator itr = self._thisptr.begin()
-        cdef ll ret = dereference(itr)
-        self._thisptr.erase(itr)
-        return ret
-    cpdef ll pop_max(self):
-        cdef set[ll].reverse_iterator itr = self._thisptr.rbegin()
-        cdef ll ret = dereference(itr)
-        self._thisptr.erase(self._thisptr.find(ret))
-        return ret
-    def __contains__(self, x):
-        if self._thisptr.find(x)==self._thisptr.end():
-            return False
-        else:
-            return True
-cpdef inline vector[int] ReadInt(int n):
-    cdef int b, c
-    cdef vector[int] *v = new vector[int]()
-    for i in range(n):
-        c = 0
-        while 1:
-            b = getchar() - 48
-            if b < 0: break
-            c = c * 10 + b
-        v.push_back(c)
-    return v[0]
+    sort(v.begin(),v.end())
 
-cpdef inline vector[string] Read(int n):
-    cdef char c
-    cdef vector[string] *vs = new vector[string]()
-    cdef string *s
-    for i in range(n):
-        s = new string()
-        while 1:
-            c = getchar()
-            if c<=32: break
-            s.push_back(c)
-        vs.push_back(s[0])
-    return vs[0]
-
-cpdef inline void PrintLongN(vector[long] l):
-    cdef int n = l.size()
-    for i in range(n): printf("%ld\\n", l[i])
-
-cpdef inline void PrintLong(vector[long] l):
-    cdef int n = l.size()
-    for i in range(n): printf("%ld ", l[i])
+    cdef unordered_map[ll,int] *umap = new unordered_map[ll,int]()
+    i = 0
+    while i < ssize:
+        umap[0][v.at(i)] = i
+        i += 1
+    cdef pair[vector[ll], unordered_map[ll, int]] *p = new pair[vector[ll], unordered_map[ll, int]](v[0], umap[0])
+    return p[0]
 """
 
 
@@ -362,42 +341,13 @@ if sys.argv[-1] == 'ONLINE_JUDGE':
     sys.exit(0)
 
 
-from atcoder import ReadInt,PrintLongN,Set
-from collections import Counter
+from atcoder import Compression
 
-def main():
+A = list(range(1,10000000,100))
 
-    N,Q = ReadInt(2)
-    s = Set()
-    c = Counter(ReadInt(N))
-    for k in c:
-        if c[k]%2==1:
-            s.add(k)
+def Compression2(L):
+    L = list(set(L))
+    L.sort()
+    return L, {q:p for p,q in enumerate(L)}
 
-    ans = []
-
-    for i in range(Q):
-        l,r,x = ReadInt(3)
-        g = s.lower_bound(l)
-        a = 0
-        count = 0
-        if g is not None:
-            while g <= r:
-                a ^= g
-                count += 1
-                g1 = s.next(g)
-                s.remove(g)
-                g = g1
-                if g is None:
-                    break
-        if count%2==1:
-            if x in s:
-                s.remove(x)
-            else:
-                s.add(x)
-        ans.append(a)
-
-    PrintLongN(ans)
-
-if __name__ == "__main__":
-    main()
+a,b = Compression(A)
